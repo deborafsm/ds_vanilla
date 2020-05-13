@@ -1,0 +1,18 @@
+CREATE TABLE empresa(
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100),
+nomeFantasia VARCHAR(100),
+cnpj VARCHAR(50),
+rua VARCHAR(50),
+referencia VARCHAR(100),
+porte VARCHAR(50),
+tipoVaga VARCHAR(40),
+salario FLOAT(3,2),
+cargo VARCHAR(20),
+horario VARCHAR(4),
+numVagas INT(3),
+prefHora VARCHAR(50),
+prefExp VARCHAR(30),
+nvExcel INT(1),
+nvWord INT(1)
+);
