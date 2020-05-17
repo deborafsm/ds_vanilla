@@ -36,7 +36,7 @@ public class dao_login {
         } catch (SQLException e) {
             System.out.println("erro: " + e);
         } finally {
-            dsVanilla_ConnectionFactory.closeConection(con, ps, rs);
+            dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
         }
         return logar;
     }

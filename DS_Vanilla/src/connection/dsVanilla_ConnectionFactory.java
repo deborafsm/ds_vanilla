@@ -31,7 +31,7 @@ public class dsVanilla_ConnectionFactory {
         }
     }
 //Fecha a conexao 
-    public static void closeConection(Connection conn) {
+    public static void closeConnection(Connection conn) {
         if (conn != null) {
             try {
                 //tem alguma coisa aberta
@@ -43,7 +43,7 @@ public class dsVanilla_ConnectionFactory {
         }
     }
 //Fecha a conexao e ps
-    public static void closeConection(Connection conn, PreparedStatement stmt) {
+    public static void closeConnection(Connection conn, PreparedStatement stmt) {
         if (stmt != null) {
             try {
                 //tem alguma coisa aberta
@@ -55,7 +55,7 @@ public class dsVanilla_ConnectionFactory {
         }
     }
 //Fecha a conexao, ps e rs
-    public static void closeConection(Connection conn, PreparedStatement stmt, ResultSet rs) {
+    public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs) {
         if (rs != null) {
             try {
                 //tem alguma coisa aberta

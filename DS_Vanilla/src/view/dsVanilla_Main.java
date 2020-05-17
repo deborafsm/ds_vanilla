@@ -61,7 +61,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/download.png"))); // NOI18N
 
-        desk.setBackground(new java.awt.Color(255, 255, 255));
         desk.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout deskLayout = new javax.swing.GroupLayout(desk);
@@ -95,6 +94,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/interface.png"))); // NOI18N
         jMenu2.setText("área de busca");
+        jMenu2.setToolTipText("");
         jMenu2.setFocusable(false);
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -220,7 +220,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        dsVanilla_CadEmpresa cadEmpresa = new dsVanilla_CadEmpresa();
+        dsVanilla_CadEmpr cadEmpresa = new dsVanilla_CadEmpr();
         cadEmpresa.setVisible(true);
         desk.add(cadEmpresa);
 
