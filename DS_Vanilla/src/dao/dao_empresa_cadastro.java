@@ -26,7 +26,7 @@ public class dao_empresa_cadastro {
     public dao_empresa_cadastro() {
         con = dsVanilla_ConnectionFactory.getConnection();
     }
-
+ //Adiciona empresa no banco de dados
     public void create(model_empresa empresa) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
@@ -54,8 +54,7 @@ public class dao_empresa_cadastro {
         }
 
     }
-    //Lista empresas
-
+    //Seleciona empresas
     public List<model_empresa> findAll() {
         String sql = "Select razao_social,rua,email,primeiro_tel,segundo_tel from empresa";
         PreparedStatement ps = null;
@@ -84,7 +83,7 @@ public class dao_empresa_cadastro {
         return listEmpresa;
     }
 
-    //String sql = "select * from tb_clientes where nome_cliente like ?";
+    //Pesquisa empresa
     public java.util.List<model_empresa> findeEmpr(String nome) {
         PreparedStatement ps = null;
         ResultSet rs = null;

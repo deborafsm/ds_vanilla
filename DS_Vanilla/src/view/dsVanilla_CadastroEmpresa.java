@@ -385,6 +385,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         campos(modelEmpresa);//Campos estão dentro de uma função
         daoEmpresa.create(modelEmpresa); // dao de empresa para inserir uma nova empresa no Banco de dados
         readJtable();
+        zeraCampo();
     }//GEN-LAST:event_btnAddEmpresaActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -397,6 +398,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         FindStudList(txtPesquisa.getText());
+        
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
     private void campos(model_empresa empresa) {
@@ -408,6 +410,16 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         empresa.setSegundo_tel(txtSegTel.getText());
         empresa.setEmail(txtEmail.getText());
 
+    }
+    private void zeraCampo(){
+        txtRazaoSocial.setText("");
+        txtNomeFantasia.setText("");
+        txtCpnj.setText("");
+        txtRua.setText("");
+        txtPrimTel.setText("");
+        txtSegTel.setText("");
+        txtEmail.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
