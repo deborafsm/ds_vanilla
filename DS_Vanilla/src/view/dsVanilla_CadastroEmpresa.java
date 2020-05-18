@@ -98,7 +98,12 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
 
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de empresas", 0, 0, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de empresas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(751, 600));
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(751, 600));
 
