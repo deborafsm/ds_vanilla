@@ -62,16 +62,17 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/download.png"))); // NOI18N
 
         desk.setForeground(new java.awt.Color(255, 255, 255));
+        desk.setPreferredSize(new java.awt.Dimension(751, 600));
 
         javax.swing.GroupLayout deskLayout = new javax.swing.GroupLayout(desk);
         desk.setLayout(deskLayout);
         deskLayout.setHorizontalGroup(
             deskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 751, Short.MAX_VALUE)
+            .addGap(0, 772, Short.MAX_VALUE)
         );
         deskLayout.setVerticalGroup(
             deskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 624, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBackground(new java.awt.Color(255, 51, 51));
@@ -170,23 +171,22 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(405, Short.MAX_VALUE))
-            .addComponent(desk, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -220,7 +220,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        dsVanilla_CadEmpr cadEmpresa = new dsVanilla_CadEmpr();
+        dsVanilla_CadastroEmpresa cadEmpresa = new dsVanilla_CadastroEmpresa();
         cadEmpresa.setVisible(true);
         desk.add(cadEmpresa);
 

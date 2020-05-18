@@ -16,6 +16,10 @@ public class model_empresa {
     private String cnpj ;
     private String rua ;
     private String greferencia ;
+    private String primeiro_tel;
+    private String segundo_tel;
+    private String email;
+    
 
     public model_empresa() {
     }
@@ -26,6 +30,41 @@ public class model_empresa {
         this.cnpj = cnpj;
         this.rua = rua;
         this.greferencia = greferencia;
+    }
+
+    public model_empresa(String razao_social, String nome_fantasia, String cnpj, String rua, String greferencia, String primeiro_tel, String segundo_tel, String email) {
+        this.razao_social = razao_social;
+        this.nome_fantasia = nome_fantasia;
+        this.cnpj = cnpj;
+        this.rua = rua;
+        this.greferencia = greferencia;
+        this.primeiro_tel = primeiro_tel;
+        this.segundo_tel = segundo_tel;
+        this.email = email;
+    }
+    
+    public String getPrimeiro_tel() {
+        return primeiro_tel;
+    }
+
+    public void setPrimeiro_tel(String primeiro_tel) {
+        this.primeiro_tel = primeiro_tel;
+    }
+
+    public String getSegundo_tel() {
+        return segundo_tel;
+    }
+
+    public void setSegundo_tel(String segundo_tel) {
+        this.segundo_tel = segundo_tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     public String getRazao_social() {
