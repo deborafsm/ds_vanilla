@@ -1,10 +1,35 @@
 CREATE database ds_vanilla;
 use ds_vanilla;
+
 create table usuarios(
 id int primary key,
 login varchar(20)  unique,
 senha varchar(20)
 );
+
+CREATE TABLE pessoas(
+	id_pessoa INT PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(200),
+    sexo varchar(15),
+    telefone varchar(200),
+    celular varchar(200),
+    email varchar(200),
+    data_nasc varchar(50),
+    rg varchar(200),
+    cpf varchar(200),
+    estado_civil varchar(200),
+    tipo_contrato varchar(200),
+    cep varchar(200),
+    cidade varchar(200),
+    estado varchar(200),
+    grau_esc varchar(200)
+    
+);
+SELECT * from pessoas;
+Select nome, email, celular , telefone,endereco,cidade,estado from pessoas
+
+alter table pessoas add column endereco varchar(200);
+
 CREATE TABLE empresa(
 id INT PRIMARY KEY AUTO_INCREMENT,
 razao_social VARCHAR(100) unique,
@@ -47,4 +72,4 @@ insert into usuarios values(1,"deborafsm","12345");
 select * from usuarios;
 
 select * from empresa;
-Select razao_social,rua,email,primeiro_tel,segundo_tel from empresa
+Select razao_social,rua,email,primeiro_tel,segundo_tel from empresa;

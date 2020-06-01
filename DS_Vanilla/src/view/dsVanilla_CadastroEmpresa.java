@@ -198,6 +198,12 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Pesquisar:");
 
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/interface.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -372,7 +378,6 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
     private void btnAddEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmpresaActionPerformed
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
-
         campos(modelEmpresa);//Campos estão dentro de uma função
         daoEmpresa.create(modelEmpresa); // dao de empresa para inserir uma nova empresa no Banco de dados
         readJtable();
@@ -392,6 +397,10 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
     private void campos(model_empresa empresa) {
         empresa.setRazao_social(txtRazaoSocial.getText());
         empresa.setNome_fantasia(txtNomeFantasia.getText());
