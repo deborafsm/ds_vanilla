@@ -39,19 +39,16 @@ segundo_tel varchar(50),
 email varchar(70)
 
 );
+create table vagas(
+id int primary key unique auto_increment,
+data_vaga varchar(100),
+nome_empregador varchar(200),
+titulo varchar(50),
+descricao varchar(300),
+celular varchar(20),
+telefone varchar(20),
+email varchar(100)
 
-create table vaga(
-cod_vaga int primary key auto_increment,
-tipo_oportunidade varchar(50),
-curso varchar(50),
-requisitos varchar(200),
-beneficios varchar(200),
-hora varchar(5),
-local_vaga varchar(50),
-tipoVaga VARCHAR(40),
-salario FLOAT(3,2),
-cargo VARCHAR(20),
-horario VARCHAR(4)
 );
 
 select * from usuarios;

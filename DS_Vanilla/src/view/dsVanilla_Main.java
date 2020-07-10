@@ -20,7 +20,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
     public dsVanilla_Main() {
         initComponents();
-        jMenu7.setMargin(new java.awt.Insets(0, 150, 0, 10));
 
     }
 
@@ -46,10 +45,8 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -148,6 +145,11 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maleta.png"))); // NOI18N
         jMenu4.setText("área de vagas");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/comunicacoes.png"))); // NOI18N
@@ -159,19 +161,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu6.setText("sobre");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jMenuBar1.add(jMenu6);
-
-        jMenu7.setBorder(null);
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/multimidia.png"))); // NOI18N
-        jMenu7.setText("Sair");
-        jMenu7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenu7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jMenu7.setMargin(new java.awt.Insets(0, 150, 0, 10));
-        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu7MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -220,10 +209,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         this.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
     }//GEN-LAST:event_jMenuBar1MouseDragged
 
-    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jMenu7MouseClicked
-
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu3ActionPerformed
@@ -243,6 +228,12 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        dsVanilla_Vagas vagas = new dsVanilla_Vagas();
+        vagas.setVisible(true);
+        desk.add(vagas);
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -289,7 +280,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
