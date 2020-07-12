@@ -31,6 +31,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         empresa.findAll().forEach((empr) -> {
             // for é usado para passar pelos objetos
             model.addRow(new Object[]{
+                empr.getId(),
                 empr.getRazao_social(),
                 empr.getRua(),
                 empr.getEmail(),
@@ -39,7 +40,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
             });
         });
     }
-    
+
     public void FindStudList(String nome) {
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
         model.setNumRows(0);
@@ -48,6 +49,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         dao.findeEmpr(nome).forEach((emp) -> {
             model.addRow(new Object[]{
                 //Chama os itens 
+                emp.getId(),
                 emp.getNome_fantasia(),
                 emp.getRazao_social(),
                 emp.getCnpj(),
@@ -55,9 +57,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                 emp.getSegundo_tel(),
                 emp.getRua(),
                 emp.getEmail(),
-                emp.getGreferencia(),
-
-            });
+                emp.getGreferencia(),});
         });
 
     }
@@ -97,11 +97,14 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         txtSegTel = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setPreferredSize(new java.awt.Dimension(914, 721));
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de empresas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(751, 600));
@@ -150,21 +153,31 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         tblEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Razão Social", "Rua", "E-mail", "1º Telefone", "2º Telefone"
+                "Cod_Empresa", "Razão Social", "Rua", "E-mail", "1º Telefone", "2º Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmpresaMouseClicked(evt);
+            }
+        });
+        tblEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblEmpresaKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblEmpresa);
@@ -222,6 +235,10 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         jLabel10.setText("E-mail");
 
+        jLabel11.setText("ID:");
+
+        txtId.setEnabled(false);
+
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -245,6 +262,8 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(txtSegTel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(txtId, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -252,13 +271,6 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel8)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,13 +280,6 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(btnAddEmpresa)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnExcluir)
-                        .addGap(46, 46, 46)
-                        .addComponent(btnEditarEmpresa))
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jLayeredPane1Layout.createSequentialGroup()
                             .addGap(10, 10, 10)
@@ -284,31 +289,52 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                         .addGroup(jLayeredPane1Layout.createSequentialGroup()
                             .addGap(4, 4, 4)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCpnj, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrimTel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(38, 38, 38)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnAddEmpresa)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnEditarEmpresa)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtCpnj, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrimTel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(38, 38, 38)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtSegTel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(txtSegTel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(69, 69, 69)
+                                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8)
+                .addGap(6, 6, 6)
+                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,7 +350,9 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8))
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPesquisar)))
+                        .addComponent(btnPesquisar)
+                        .addComponent(jLabel11)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -343,7 +371,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCpnj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9)
@@ -353,23 +381,29 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(txtPrimTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSegTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEmpresa)
-                    .addComponent(btnEditarEmpresa)
-                    .addComponent(btnExcluir))
-                .addContainerGap())
+                    .addComponent(btnExcluir)
+                    .addComponent(btnEditarEmpresa))
+                .addGap(70, 70, 70))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         pack();
@@ -385,22 +419,56 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddEmpresaActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
+        dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
+        modelEmpresa.setId(txtId.getText());
+        daoEmpresa.deleteEmpres(modelEmpresa);
+        readJtable();
+        zeraCampo();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEmpresaActionPerformed
-        // TODO add your handling code here:
+        model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
+        dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
+        campos(modelEmpresa);
+        daoEmpresa.updateEmpresa(modelEmpresa);
+        readJtable();
+        zeraCampo();
     }//GEN-LAST:event_btnEditarEmpresaActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         FindStudList(txtPesquisa.getText());
-        
+
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void tblEmpresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEmpresaKeyReleased
+        if (tblEmpresa.getSelectedRow() != -1) {
+            txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
+            txtRazaoSocial.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 1).toString());
+            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
+            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
+            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
+            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+
+        }
+    }//GEN-LAST:event_tblEmpresaKeyReleased
+
+    private void tblEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpresaMouseClicked
+        if (tblEmpresa.getSelectedRow() != -1) {
+            txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
+            txtRazaoSocial.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 1).toString());
+            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
+            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
+            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
+            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+
+        }
+    }//GEN-LAST:event_tblEmpresaMouseClicked
     private void campos(model_empresa empresa) {
         empresa.setRazao_social(txtRazaoSocial.getText());
         empresa.setNome_fantasia(txtNomeFantasia.getText());
@@ -411,7 +479,8 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         empresa.setEmail(txtEmail.getText());
 
     }
-    private void zeraCampo(){
+
+    private void zeraCampo() {
         txtRazaoSocial.setText("");
         txtNomeFantasia.setText("");
         txtCpnj.setText("");
@@ -419,7 +488,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         txtPrimTel.setText("");
         txtSegTel.setText("");
         txtEmail.setText("");
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -429,6 +498,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -443,6 +513,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblEmpresa;
     private javax.swing.JFormattedTextField txtCpnj;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNomeFantasia;
     private javax.swing.JTextField txtPesquisa;
     private javax.swing.JFormattedTextField txtPrimTel;

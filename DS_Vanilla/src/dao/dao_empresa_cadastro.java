@@ -26,7 +26,8 @@ public class dao_empresa_cadastro {
     public dao_empresa_cadastro() {
         con = dsVanilla_ConnectionFactory.getConnection();
     }
- //Adiciona empresa no banco de dados
+    //Adiciona empresa no banco de dados
+
     public void create(model_empresa empresa) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
@@ -54,9 +55,10 @@ public class dao_empresa_cadastro {
         }
 
     }
+
     //Seleciona empresas
     public List<model_empresa> findAll() {
-        String sql = "Select razao_social,rua,email,primeiro_tel,segundo_tel from empresa";
+        String sql = "Select id, razao_social,rua,email,primeiro_tel,segundo_tel from empresa";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_empresa> listEmpresa = new ArrayList<>();
@@ -66,7 +68,7 @@ public class dao_empresa_cadastro {
             while (rs.next()) {
                 model_empresa empresa = new model_empresa();
 
-//                lista.setNome(rs.getString("nomeAluno"));
+                empresa.setId(rs.getString("id"));
                 empresa.setRazao_social(rs.getString("razao_social"));
                 empresa.setRua(rs.getString("rua"));
                 empresa.setEmail(rs.getString("email"));
@@ -97,7 +99,7 @@ public class dao_empresa_cadastro {
                 model_empresa empresa = new model_empresa();
                 //Lista os componentes
                 empresa.setRazao_social(rs.getString("razao_social"));
-                
+
                 //E adiciona no array list
                 findeEmpr.add(empresa);
             }
@@ -108,5 +110,44 @@ public class dao_empresa_cadastro {
         }
         //Retora o array 
         return findeEmpr;
+    }
+
+    //Remove
+    public void deleteEmpres(model_empresa empresa) {
+        //query deleta cliente de acordo com o id
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM empresa WHERE id = ?";
+
+        try {//tenta fazer a logica abaixo
+            ps = con.prepareStatement(sql);
+            ps.setString(1, empresa.getId());
+
+            ps.executeUpdate();//Executa a query
+            JOptionPane.showMessageDialog(null, "Operador excluido com sucesso"); //mensagem informando sucesso
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e);//mensagem informando falha e o erro causado
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps); //fecha as conexoes utilizadas
+        }
+    }
+
+    //edit
+    public void updateEmpresa(model_empresa empresa) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE empresa SET razao_social =?, nome_fantasia=?, cnpj=?, rua=?,  "
+                + "primeiro_tel=?, segundo_tel=?, email =? WHERE id =?;";
+        try {
+            ps = con.prepareStatement(sql);
+
+            ps.setString(1, empresa.getId());
+            ps.setString(2, empresa.getRazao_social());
+            ps.setString(3, empresa.getNome_fantasia());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Empresa alterado com sucesso.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro:" + e);
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
+        }
     }
 }

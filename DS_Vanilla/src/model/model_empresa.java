@@ -10,7 +10,7 @@ package model;
  * @author DeboraDev
  */
 public class model_empresa {
-
+    private String id;
     private String razao_social;
     private String nome_fantasia ;
     private String cnpj ;
@@ -42,6 +42,15 @@ public class model_empresa {
         this.segundo_tel = segundo_tel;
         this.email = email;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     
     public String getPrimeiro_tel() {
         return primeiro_tel;
