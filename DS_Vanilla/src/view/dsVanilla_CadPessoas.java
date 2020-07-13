@@ -30,6 +30,22 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         dao.findAll().forEach((pessoa) -> {
             //Select nome, email, celular , telefone,endereco,cidade,estado from pessoas
             model.addRow(new Object[]{
+                /** pessoa.getId, 
+                 * nome, 
+                 * sexo, 
+                 * telefone, 
+                 * celular, 
+                 * email,
+                 * data_nasc, 
+                 * rg, 
+                 * cpf, 
+                 * estado_civil, 
+                 * tipo_contrato, 
+                 * cep, endereco, 
+                 * cidade, 
+                 * estado, 
+                 * grau_esc**/
+
                 pessoa.getNome(),
                 pessoa.getTelefone(),
                 pessoa.getCelular(),

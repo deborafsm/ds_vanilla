@@ -13,7 +13,7 @@ public class model_pessoa {
     
     //# id_pessoa, nome, sexo, telefone, celular, email, data_nasc, rg, cpf, estado_civil, 
     //tipo_contrato, cep, cidade, estado, grau_esc
-
+    private String id;
     private String nome;
     private String sexo;
     private String telefone;
@@ -169,6 +169,14 @@ public class model_pessoa {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
         
     

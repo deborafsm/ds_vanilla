@@ -6,6 +6,7 @@
 package dao;
 
 import ds_vanilla.dsVanilla_ConnectionFactory;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,10 +66,10 @@ public class dao_pessoa_cadastro {
 
     }
 
-    //list 
+    //Select 
     public List<model_pessoa> findAll() {
 
-        String sql = "Select nome,telefone,celular,email,cidade,estado,endereco from pessoas";
+        String sql = "Select id_pessoa, nome, sexo, telefone, celular, email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_pessoa> listPessoa = new ArrayList<>();
@@ -77,14 +78,22 @@ public class dao_pessoa_cadastro {
             rs = ps.executeQuery();
             while (rs.next()) {
                 model_pessoa pessoa = new model_pessoa();
-
+                pessoa.setId(rs.getString("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
+                pessoa.setSexo(rs.getString("sexo"));
                 pessoa.setTelefone(rs.getString("telefone"));
                 pessoa.setCelular(rs.getString("celular"));
                 pessoa.setEmail(rs.getString("email"));
+                pessoa.setData_nasc(rs.getString("data_nasc"));
+                pessoa.setRg(rs.getString("rg"));
+                pessoa.setCpf(rs.getString("cpf"));
+                pessoa.setEstado_civil(rs.getString("estado_civil"));
+                pessoa.setTipo_contrato(rs.getString("tipo_contrato"));
+                pessoa.setCep(rs.getString("cep"));
+                pessoa.setEndereco(rs.getString("endereco"));
                 pessoa.setCidade(rs.getString("cidade"));
                 pessoa.setEstado(rs.getString("estado"));
-                pessoa.setEndereco(rs.getString("endereco"));
+                pessoa.setGrau_esc(rs.getString("grau_esc"));
 
                 listPessoa.add(pessoa);
             }
@@ -97,5 +106,22 @@ public class dao_pessoa_cadastro {
     }
 
     //DROP
-    //Pesquisa
+    public void remove(model_pessoa pessoa) {
+        //query deleta cliente de acordo com o id
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM pessoas WHERE id_pessoa = ?";
+
+        try {//tenta fazer a logica abaixo
+            ps = con.prepareStatement(sql);
+            ps.setString(1, pessoa.getId()); //pega o codigo do pc
+            ps.executeUpdate();//Executa a query
+            JOptionPane.showMessageDialog(null, "Dados Excluidos"); //mensagem informando sucesso
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e);//mensagem informando falha e o erro causado
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps); //fecha as conexoes utilizadas
+        }
+    }
+
+    //fIND
 }
