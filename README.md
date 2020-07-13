@@ -14,13 +14,16 @@
 - [x] Select
 
 # Pessoas
-- [ ] Insert
+- [x] Insert
+- [ ] Update
+- [x] Find
+- [ ] Select
+
+# Vagas
+- [x] Insert
 - [ ] Update
 - [ ] Find
 - [ ] Select
 
-# Vagas
-- [ ] Insert
-- [ ] Update
-- [ ] Find
-- [ ] Select
+# Usuarios
+- [x] Select
