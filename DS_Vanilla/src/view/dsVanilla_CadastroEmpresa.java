@@ -11,7 +11,7 @@ import model.model_empresa;
 
 /**
  *
- * @author Usuário
+ * @author Debora Freire
  */
 public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
@@ -22,7 +22,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         initComponents();
         readJtable();
     }
-
+    
     public void readJtable() {
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
         model.setNumRows(0);
@@ -33,15 +33,17 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
             model.addRow(new Object[]{
                 empr.getId(),
                 empr.getRazao_social(),
+                empr.getNome_fantasia(),
+                empr.getCnpj(),
                 empr.getRua(),
-                empr.getEmail(),
                 empr.getPrimeiro_tel(),
-                empr.getSegundo_tel()
+                empr.getSegundo_tel(),
+                empr.getEmail()
             });
         });
     }
 
-    public void FindStudList(String nome) {
+    public void FindEmpr(String nome) {
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
         model.setNumRows(0);
         dao_empresa_cadastro dao = new dao_empresa_cadastro();
@@ -50,14 +52,13 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
             model.addRow(new Object[]{
                 //Chama os itens 
                 emp.getId(),
-                emp.getNome_fantasia(),
                 emp.getRazao_social(),
+                emp.getNome_fantasia(),
                 emp.getCnpj(),
+                emp.getRua(),
                 emp.getPrimeiro_tel(),
                 emp.getSegundo_tel(),
-                emp.getRua(),
-                emp.getEmail(),
-                emp.getGreferencia(),});
+                emp.getEmail()});
         });
 
     }
@@ -153,17 +154,17 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         tblEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cod_Empresa", "Razão Social", "Rua", "E-mail", "1º Telefone", "2º Telefone"
+                "Cod_Empresa", "Razão Social", "Nome Fantasia", "CNPJ", "Rua", "1º Telefone", "2º Telefone", "E-mail"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -192,7 +193,9 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel7.setText("* Telefone");
@@ -437,8 +440,8 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarEmpresaActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        FindStudList(txtPesquisa.getText());
-
+        FindEmpr(txtPesquisa.getText());
+       
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -450,10 +453,12 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         if (tblEmpresa.getSelectedRow() != -1) {
             txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
             txtRazaoSocial.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 1).toString());
-            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
-            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
-            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
-            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+            txtNomeFantasia.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
+            txtCpnj.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
+            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
+            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 6).toString());
+            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 7).toString());
 
         }
     }//GEN-LAST:event_tblEmpresaKeyReleased
@@ -462,10 +467,12 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         if (tblEmpresa.getSelectedRow() != -1) {
             txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
             txtRazaoSocial.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 1).toString());
-            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
-            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
-            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
-            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+            txtNomeFantasia.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 2).toString());
+            txtCpnj.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 3).toString());
+            txtRua.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 4).toString());
+            txtPrimTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 5).toString());
+            txtSegTel.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 6).toString());
+            txtEmail.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 7).toString());
 
         }
     }//GEN-LAST:event_tblEmpresaMouseClicked

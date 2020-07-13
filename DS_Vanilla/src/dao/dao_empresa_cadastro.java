@@ -35,15 +35,15 @@ public class dao_empresa_cadastro {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO empresa (razao_social,nome_fantasia,cnpj,rua,referencia,primeiro_tel,segundo_tel,email)VALUES(?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO empresa (razao_social,nome_fantasia,cnpj,rua,primeiro_tel,segundo_tel,email)VALUES(?,?,?,?,?,?,?)");
+
             stmt.setString(1, empresa.getRazao_social());
             stmt.setString(2, empresa.getNome_fantasia());
             stmt.setString(3, empresa.getCnpj());
             stmt.setString(4, empresa.getRua());
-            stmt.setString(5, empresa.getGreferencia());
-            stmt.setString(6, empresa.getPrimeiro_tel());
-            stmt.setString(7, empresa.getSegundo_tel());
-            stmt.setString(8, empresa.getEmail());
+            stmt.setString(5, empresa.getPrimeiro_tel());
+            stmt.setString(6, empresa.getSegundo_tel());
+            stmt.setString(7, empresa.getEmail());
 
             stmt.executeUpdate();
 
@@ -58,7 +58,7 @@ public class dao_empresa_cadastro {
 
     //Seleciona empresas
     public List<model_empresa> findAll() {
-        String sql = "Select id, razao_social,rua,email,primeiro_tel,segundo_tel from empresa";
+        String sql = "Select id, razao_social, nome_fantasia, cnpj, rua, primeiro_tel, segundo_tel, email from empresa";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_empresa> listEmpresa = new ArrayList<>();
@@ -70,10 +70,12 @@ public class dao_empresa_cadastro {
 
                 empresa.setId(rs.getString("id"));
                 empresa.setRazao_social(rs.getString("razao_social"));
+                empresa.setNome_fantasia(rs.getString("nome_fantasia"));
+                empresa.setCnpj(rs.getString("cnpj"));
                 empresa.setRua(rs.getString("rua"));
-                empresa.setEmail(rs.getString("email"));
                 empresa.setPrimeiro_tel(rs.getString("primeiro_tel"));
                 empresa.setSegundo_tel(rs.getString("segundo_tel"));
+                empresa.setEmail(rs.getString("email"));
 
                 listEmpresa.add(empresa);
             }
@@ -97,9 +99,16 @@ public class dao_empresa_cadastro {
             rs = ps.executeQuery(); //Result set para se obter o resultado
             while (rs.next()) {//Enquando tiver resultado (linhas)
                 model_empresa empresa = new model_empresa();
-                //Lista os componentes
+                empresa.setId(rs.getString("id"));
                 empresa.setRazao_social(rs.getString("razao_social"));
+                empresa.setNome_fantasia(rs.getString("nome_fantasia"));
+                empresa.setCnpj(rs.getString("cnpj"));
+                empresa.setRua(rs.getString("rua"));
+                empresa.setPrimeiro_tel(rs.getString("primeiro_tel"));
+                empresa.setSegundo_tel(rs.getString("segundo_tel"));
+                empresa.setEmail(rs.getString("email"));
 
+                //Lista os componentes
                 //E adiciona no array list
                 findeEmpr.add(empresa);
             }
@@ -138,12 +147,17 @@ public class dao_empresa_cadastro {
                 + "primeiro_tel=?, segundo_tel=?, email =? WHERE id =?;";
         try {
             ps = con.prepareStatement(sql);
-
             ps.setString(1, empresa.getId());
             ps.setString(2, empresa.getRazao_social());
             ps.setString(3, empresa.getNome_fantasia());
+            ps.setString(4, empresa.getCnpj());
+            ps.setString(5, empresa.getRua());
+            ps.setString(6, empresa.getPrimeiro_tel());
+            ps.setString(7, empresa.getSegundo_tel());
+            ps.setString(8, empresa.getEmail());
+
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Empresa alterado com sucesso.");
+            JOptionPane.showMessageDialog(null, "Dados da Empresa alterados com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro:" + e);
         } finally {
