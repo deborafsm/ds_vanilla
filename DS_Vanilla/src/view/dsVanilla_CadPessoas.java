@@ -23,35 +23,37 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         readJtable();
     }
 
+    private String[] retornarTextos() {
+        String[] valores = {txtnome.getText(), txtcel.getText()};
+        return valores;
+    }
+
     public void readJtable() {
         DefaultTableModel model = (DefaultTableModel) tblPessoa.getModel();
         model.setNumRows(0);
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
         dao.findAll().forEach((pessoa) -> {
-            //Select nome, email, celular , telefone,endereco,cidade,estado from pessoas
+            //Ta errado
             model.addRow(new Object[]{
-                /** pessoa.getId, 
-                 * nome, 
-                 * sexo, 
-                 * telefone, 
-                 * celular, 
-                 * email,
-                 * data_nasc, 
-                 * rg, 
-                 * cpf, 
-                 * estado_civil, 
-                 * tipo_contrato, 
-                 * cep, endereco, 
-                 * cidade, 
-                 * estado, 
-                 * grau_esc**/
-
                 pessoa.getNome(),
                 pessoa.getTelefone(),
                 pessoa.getCelular(),
                 pessoa.getEmail(),
-                pessoa.getCidade(),
-                pessoa.getEstado(),
+                pessoa.getEndereco(),});
+        });
+    }
+
+    public void FindOperador(String nome) {
+        DefaultTableModel model = (DefaultTableModel) tblPessoa.getModel();
+        model.setNumRows(0);
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        dao.findPessoas(nome).forEach((pessoa) -> {
+            //Ta errado
+            model.addRow(new Object[]{
+                pessoa.getNome(),
+                pessoa.getTelefone(),
+                pessoa.getCelular(),
+                pessoa.getEmail(),
                 pessoa.getEndereco(),});
         });
     }
@@ -74,10 +76,8 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         cboSexo = new javax.swing.JComboBox<>();
         txtnome = new javax.swing.JTextField();
-        txtdata = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         txttel = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -104,6 +104,9 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         brnadd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        txtNomePesquisa = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -121,21 +124,31 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         tblPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Telefone", "Celular", "E-mail", "Cidade", "Estado", "Endereço"
+                "Nome", "Telefone", "Celular", "E-mail", "Endereço", "CPF", "RG", "Contrato", "Cidade", "Estado", "CEP", "Grau"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPessoaMouseClicked(evt);
+            }
+        });
+        tblPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblPessoaKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblPessoa);
@@ -148,15 +161,7 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Endereço:");
 
-        jLabel5.setText("Data de Nascimento:");
-
         cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Não Especificado" }));
-
-        try {
-            txtdata.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jLabel6.setText("Telefone:");
 
@@ -251,19 +256,13 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                                 .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel13)
-                                        .addComponent(jLabel10))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtcpf)
-                                        .addComponent(cbocidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtdata, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel10))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtcpf)
+                                .addComponent(cbocidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(21, 21, 21)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -345,8 +344,6 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                         .addComponent(txtend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(cbocont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -377,6 +374,20 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jLabel17.setText("Nome Completo:");
+
+        jButton3.setText("pesquisar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -384,20 +395,31 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNomePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(txtNomePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -426,17 +448,67 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         dao.create(pessoa);
         readJtable();
     }//GEN-LAST:event_brnaddActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Ao clicar no botao
+        //Pesquisa o usuario
+        //Seta todos os valores 
+        model_pessoa pessoa = new model_pessoa();
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        dao.findPessoas(txtnome.getText());
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+
+
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void tblPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPessoaKeyReleased
+
+        if (tblPessoa.getSelectedRow() != -1) {
+            txtnome.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0).toString());
+            txttel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 1).toString());
+            txtcel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 2).toString());
+            txtemail.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 3).toString());
+            txtend.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 4).toString());
+            txtcpf.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 5).toString());
+            txterg.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 6).toString());
+            cbocont.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 7).toString());
+            cbocidade.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 8).toString());
+            cboestado.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 9).toString());
+            txtcep.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 10).toString());
+            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+
+        }
+    }//GEN-LAST:event_tblPessoaKeyReleased
+
+    private void tblPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPessoaMouseClicked
+        if (tblPessoa.getSelectedRow() != -1) {
+            txtnome.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0).toString());
+            txttel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 1).toString());
+            txtcel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 2).toString());
+            txtemail.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 3).toString());
+            txtend.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 4).toString());
+            txtcpf.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 5).toString());
+            txterg.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 6).toString());
+            cbocont.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 7).toString());
+            cbocidade.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 8).toString());
+            cboestado.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 9).toString());
+            txtcep.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 10).toString());
+            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+
+        }
+    }//GEN-LAST:event_tblPessoaMouseClicked
     public void campos(model_pessoa pessoa) {
         pessoa.setNome(txtnome.getText());
         pessoa.setTelefone(txttel.getText());
         pessoa.setCelular(txtcel.getText());
         pessoa.setEmail(txtemail.getText());
-        pessoa.setData_nasc(txtdata.getText());
-        pessoa.setCpf(txtcep.getText());
+        pessoa.setCpf(txtcpf.getText());
         pessoa.setRg(txterg.getText());
         pessoa.setCep(txtcep.getText());
         pessoa.setEndereco(txtend.getText());
-
         pessoa.setSexo(cboSexo.getSelectedItem().toString());
         pessoa.setTipo_contrato(cbocont.getSelectedItem().toString());
         pessoa.setEstado_civil(cboestadocivil.getSelectedItem().toString());
@@ -446,14 +518,15 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
     }
 
     public void limpar() {
+
         txtnome.setText("");
-        txttel.setText("");
         txtcel.setText("");
+        txttel.setText("");
+        txtcep.setText("");
+        txtend.setText("");
         txtemail.setText("");
-        txtdata.setText("");
-        txtcep.setText("");
         txterg.setText("");
-        txtcep.setText("");
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -466,6 +539,7 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cboestadocivil;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -475,10 +549,10 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -487,10 +561,10 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPessoa;
+    private javax.swing.JTextField txtNomePesquisa;
     private javax.swing.JFormattedTextField txtcel;
     private javax.swing.JFormattedTextField txtcep;
     private javax.swing.JFormattedTextField txtcpf;
-    private javax.swing.JFormattedTextField txtdata;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtend;
     private javax.swing.JFormattedTextField txterg;

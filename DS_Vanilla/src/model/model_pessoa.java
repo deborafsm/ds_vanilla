@@ -20,6 +20,7 @@ public class model_pessoa {
     private String celular;
     private String email;
     private String data_nasc;
+    private String idade;
     private String rg;
     private String cpf;
     private String estado_civil;
@@ -177,6 +178,14 @@ public class model_pessoa {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdade() {
+        return idade;
+    }
+
+    public void setIdade(String idade) {
+        this.idade = idade;
     }
         
     
