@@ -28,7 +28,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         model.setNumRows(0);
         dao_empresa_cadastro empresa = new dao_empresa_cadastro();
 
-        empresa.findAll().forEach((empr) -> {
+        empresa.select().forEach((empr) -> {
             // for é usado para passar pelos objetos
             model.addRow(new Object[]{
                 empr.getId(),
@@ -416,7 +416,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
         campos(modelEmpresa);//Campos estão dentro de uma função
-        daoEmpresa.create(modelEmpresa); // dao de empresa para inserir uma nova empresa no Banco de dados
+        daoEmpresa.insert(modelEmpresa); // dao de empresa para inserir uma nova empresa no Banco de dados
         readJtable();
         zeraCampo();
     }//GEN-LAST:event_btnAddEmpresaActionPerformed
@@ -425,7 +425,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
         modelEmpresa.setId(txtId.getText());
-        daoEmpresa.deleteEmpres(modelEmpresa);
+        daoEmpresa.delete(modelEmpresa);
         readJtable();
         zeraCampo();
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -434,7 +434,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
         campos(modelEmpresa);
-        daoEmpresa.updateEmpresa(modelEmpresa);
+        daoEmpresa.update(modelEmpresa);
         readJtable();
         zeraCampo();
     }//GEN-LAST:event_btnEditarEmpresaActionPerformed

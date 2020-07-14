@@ -30,7 +30,7 @@ public class dao_pessoa_cadastro {
         con = dsVanilla_ConnectionFactory.getConnection();
     }
 
-    public void create(model_pessoa pessoa) {
+    public void insert(model_pessoa pessoa) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
 
@@ -66,7 +66,7 @@ public class dao_pessoa_cadastro {
     }
 
     //Select 
-    public List<model_pessoa> findAll() {
+    public List<model_pessoa> select() {
 
         String sql = "Select id_pessoa, nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
         PreparedStatement ps = null;
@@ -122,7 +122,6 @@ public class dao_pessoa_cadastro {
     }
 
     //Find
-    
     public java.util.List<model_pessoa> findPessoas(String nome) {
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -28,7 +28,7 @@ public class dao_empresa_cadastro {
     }
     //Adiciona empresa no banco de dados
 
-    public void create(model_empresa empresa) {
+    public void insert(model_empresa empresa) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
 
@@ -57,7 +57,7 @@ public class dao_empresa_cadastro {
     }
 
     //Seleciona empresas
-    public List<model_empresa> findAll() {
+    public List<model_empresa> select() {
         String sql = "Select id, razao_social, nome_fantasia, cnpj, rua, primeiro_tel, segundo_tel, email from empresa";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -122,7 +122,7 @@ public class dao_empresa_cadastro {
     }
 
     //Remove
-    public void deleteEmpres(model_empresa empresa) {
+    public void delete(model_empresa empresa) {
         //query deleta cliente de acordo com o id
         PreparedStatement ps = null;
         String sql = "DELETE FROM empresa WHERE id = ?";
@@ -141,7 +141,7 @@ public class dao_empresa_cadastro {
     }
 
     //edit
-    public void updateEmpresa(model_empresa empresa) {
+    public void update(model_empresa empresa) {
         PreparedStatement ps = null;
         String sql = "UPDATE empresa SET razao_social =?, nome_fantasia=?, cnpj=?, rua=?,  "
                 + "primeiro_tel=?, segundo_tel=?, email =? WHERE id =?;";

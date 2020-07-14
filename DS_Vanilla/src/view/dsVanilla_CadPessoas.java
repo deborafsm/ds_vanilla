@@ -23,16 +23,13 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         readJtable();
     }
 
-    private String[] retornarTextos() {
-        String[] valores = {txtnome.getText(), txtcel.getText()};
-        return valores;
-    }
+    
 
     public void readJtable() {
         DefaultTableModel model = (DefaultTableModel) tblPessoa.getModel();
         model.setNumRows(0);
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-        dao.findAll().forEach((pessoa) -> {
+        dao.select().forEach((pessoa) -> {
             //Ta errado
             model.addRow(new Object[]{
                 pessoa.getNome(),
@@ -445,7 +442,7 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         model_pessoa pessoa = new model_pessoa();
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
         campos(pessoa);
-        dao.create(pessoa);
+        dao.insert(pessoa);
         readJtable();
     }//GEN-LAST:event_brnaddActionPerformed
 

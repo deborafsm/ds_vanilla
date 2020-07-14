@@ -10,8 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
-import model.model_pessoa;
 import model.model_vagas;
 
 /**
@@ -29,7 +30,7 @@ public class dao_vagas {
     }
 
     //insert;
-    public void create(model_vagas vagas) {
+    public void insert(model_vagas vagas) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
 
@@ -55,21 +56,50 @@ public class dao_vagas {
 
     }
 
-    //update
-    public void updateVagas(model_vagas id) {
+    //Select
+    public List<model_vagas> select() {
+        String sql = "select  id, data_vaga, nome_empregador, titulo, descricao, celular, telefone, email\n" +
+" from vagas";
+        List<model_vagas> listOp = new ArrayList<>();
         try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
 
-        } catch (Exception e) {
+                model_vagas vagas = new model_vagas();
+                vagas.setId(rs.getString("id"));
+                vagas.setDate(rs.getString("data_vaga"));
+                vagas.setNome(rs.getString("nome_empregador"));
+                vagas.setTitulo(rs.getString("titulo"));
+                vagas.setDescricao(rs.getString("descricao"));
+                vagas.setCelular(rs.getString("celular"));
+                vagas.setTelefone(rs.getString("telefone"));
+                vagas.setEmail(rs.getString("email"));
+
+                listOp.add(vagas);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro" + e);//Erro
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
         }
+        return listOp;
     }
+    
+    //Remover
+     public void delete(model_vagas op) {
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM vagas WHERE id = ?";
 
-    //remove
-    public void removeVagas() {
-
-    }
-
-    //find
-    public void find() {
-
+        try {//tenta fazer a logica abaixo
+            ps = con.prepareStatement(sql);
+            ps.setString(1, op.getId()); //pega o codigo do pc
+            ps.executeUpdate();//Executa a query
+            JOptionPane.showMessageDialog(null, "Vaga excluida com sucesso"); 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e);
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
+        }
     }
 }

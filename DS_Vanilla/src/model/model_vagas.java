@@ -10,6 +10,7 @@ package model;
  * @author DeboraDev
  */
 public class model_vagas {
+    private String id;
     private String titulo;
     private String date;
     private String nome;
@@ -74,6 +75,14 @@ public class model_vagas {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     
     
