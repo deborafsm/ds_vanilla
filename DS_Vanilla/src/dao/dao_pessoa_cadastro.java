@@ -68,7 +68,7 @@ public class dao_pessoa_cadastro {
     //Select 
     public List<model_pessoa> select() {
 
-        String sql = "Select id_pessoa, nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
+        String sql = "Select  nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_pessoa> listPessoa = new ArrayList<>();
@@ -77,7 +77,6 @@ public class dao_pessoa_cadastro {
             rs = ps.executeQuery();
             while (rs.next()) {
                 model_pessoa pessoa = new model_pessoa();
-                pessoa.setId(rs.getString("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setSexo(rs.getString("sexo"));
                 pessoa.setTelefone(rs.getString("telefone"));
@@ -159,5 +158,32 @@ public class dao_pessoa_cadastro {
         //Retora o array 
         return findeEmpr;
     }
-
+    public void update(model_pessoa pessoa){
+        PreparedStatement ps = null;
+        String sql = "UPDATE pessoa SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
+                + ", estado_civil= ?, tipo_contrato= ?, cep= ?, endereco= ?, cidade= ?, estado= ?, grau_esc = ? WHERE id_pessoa = ?";
+        try {
+            ps = con.prepareStatement(sql); 
+            ps.setString(1, pessoa.getNome());
+            ps.setString(2, pessoa.getSexo());
+            ps.setString(3, pessoa.getTelefone());
+            ps.setString(4, pessoa.getCelular());
+            ps.setString(5, pessoa.getEmail());
+            ps.setString(6, pessoa.getRg());
+            ps.setString(7, pessoa.getCpf());
+            ps.setString(8, pessoa.getEstado_civil());
+            ps.setString(9, pessoa.getTipo_contrato());
+            ps.setString(10, pessoa.getCep());
+            ps.setString(11, pessoa.getEndereco()); 
+            ps.setString(12, pessoa.getCidade());
+            ps.setString(13, pessoa.getEstado());
+            ps.setString(14, pessoa.getGrau_esc());
+            ps.setString(15, pessoa.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Erro:   "+e);
+        }finally{
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
+        }
+    }
 }

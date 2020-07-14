@@ -36,7 +36,16 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                 pessoa.getTelefone(),
                 pessoa.getCelular(),
                 pessoa.getEmail(),
-                pessoa.getEndereco(),});
+                pessoa.getEndereco(),
+                pessoa.getCpf(),
+                pessoa.getRg(),
+                pessoa.getTipo_contrato(),
+                pessoa.getCidade(),
+                pessoa.getEstado(),
+                pessoa.getCep(),
+                pessoa.getGrau_esc()
+                
+            });
         });
     }
 
@@ -51,7 +60,14 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                 pessoa.getTelefone(),
                 pessoa.getCelular(),
                 pessoa.getEmail(),
-                pessoa.getEndereco(),});
+                pessoa.getEndereco(),
+                pessoa.getCpf(),
+                pessoa.getRg(),
+                pessoa.getTipo_contrato(),
+                pessoa.getCidade(),
+                pessoa.getEstado(),
+                pessoa.getCep(),
+                pessoa.getGrau_esc()});
         });
     }
 
@@ -121,17 +137,17 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         tblPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Telefone", "Celular", "E-mail", "Endereço", "CPF", "RG", "Contrato", "Cidade", "Estado", "CEP", "Grau"
+                "Nome", "Telefone", "Celular", "E-mail", "Endereço", "CPF", "RG", "Contrato", "Cidade", "Estado", "CEP", "Grau", "Est.Civil"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -235,6 +251,11 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/draw.png"))); // NOI18N
         jButton2.setText("Editar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -475,7 +496,8 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
             cbocidade.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 8).toString());
             cboestado.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 9).toString());
             txtcep.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 10).toString());
-            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+            cboEsco.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 12).toString());
 
         }
     }//GEN-LAST:event_tblPessoaKeyReleased
@@ -493,10 +515,19 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
             cbocidade.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 8).toString());
             cboestado.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 9).toString());
             txtcep.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 10).toString());
-            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+            cboEsco.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 11).toString());
+            cboestadocivil.setSelectedItem(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 12).toString());
 
         }
     }//GEN-LAST:event_tblPessoaMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        model_pessoa pessoa = new model_pessoa();
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        pessoa.setId(tblPessoa.getValueAt(tblPessoa.getSelectedRow(),0).toString());
+        campos(pessoa);
+        dao.update(pessoa);
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void campos(model_pessoa pessoa) {
         pessoa.setNome(txtnome.getText());
         pessoa.setTelefone(txttel.getText());
