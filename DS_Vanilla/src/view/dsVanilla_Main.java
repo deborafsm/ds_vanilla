@@ -36,17 +36,17 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         desk = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1218, 648));
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -84,28 +84,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/avatar-homem.png"))); // NOI18N
-        jMenu1.setText("área de usuário");
-        jMenu1.setFocusable(false);
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/interface.png"))); // NOI18N
-        jMenu2.setText("área de busca");
-        jMenu2.setToolTipText("");
-        jMenu2.setFocusable(false);
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jMenuItem1.setText("Empresas");
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/caneta.png"))); // NOI18N
         jMenu3.setText("área de Cadastro");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -141,6 +119,17 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/interface.png"))); // NOI18N
+        jMenu2.setText("área de busca");
+        jMenu2.setToolTipText("");
+        jMenu2.setFocusable(false);
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Empresas");
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maleta.png"))); // NOI18N
         jMenu4.setText("área de vagas");
@@ -225,10 +214,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem3MouseClicked
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1MouseClicked
-
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         dsVanilla_Vagas vagas = new dsVanilla_Vagas();
         vagas.setVisible(true);
@@ -274,7 +259,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
