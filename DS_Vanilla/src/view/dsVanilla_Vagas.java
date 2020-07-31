@@ -41,10 +41,9 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
              */
             model.addRow(new Object[]{
                 op.getId(),
-                op.getDate(),
-                op.getNome(),
                 op.getTitulo(),
                 op.getDescricao(),
+                op.getNome(),
                 op.getCelular(),
                 op.getTelefone(),
                 op.getEmail()
@@ -185,6 +184,17 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
         jLabel7.setForeground(new java.awt.Color(255, 0, 0));
         jLabel7.setText("Data:");
 
+        jScrollPane3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseClicked(evt);
+            }
+        });
+        jScrollPane3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jScrollPane3KeyReleased(evt);
+            }
+        });
+
         tblVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -202,6 +212,19 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblVagas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVagasMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblVagasMouseReleased(evt);
+            }
+        });
+        tblVagas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblVagasKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tblVagas);
@@ -404,6 +427,42 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
         dao.delete(vagas);
         readJtable();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tblVagasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVagasMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblVagasMouseReleased
+
+    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseClicked
+        if (tblVagas.getSelectedRow() != -1) {
+            txtId.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 0).toString());
+            txtTitulo.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 1).toString());
+            txtDesc.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 2).toString());
+            txtNome.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 3).toString());
+            txtCel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 4).toString());
+            txtTel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 5).toString());
+            txtEmail.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 6).toString());
+        }
+    }//GEN-LAST:event_jScrollPane3MouseClicked
+
+    private void tblVagasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVagasKeyReleased
+         if (tblVagas.getSelectedRow() != -1) {
+            txtId.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 0).toString());
+            txtTitulo.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 1).toString());
+            txtDesc.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 2).toString());
+            txtNome.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 3).toString());
+            txtCel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 4).toString());
+            txtTel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 5).toString());
+            txtEmail.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 6).toString());
+        }
+    }//GEN-LAST:event_tblVagasKeyReleased
+
+    private void tblVagasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVagasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblVagasMouseClicked
+
+    private void jScrollPane3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jScrollPane3KeyReleased
+      
+    }//GEN-LAST:event_jScrollPane3KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -39,14 +39,13 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1218, 648));
         setResizable(false);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -69,7 +68,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         );
         deskLayout.setVerticalGroup(
             deskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 611, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBackground(new java.awt.Color(255, 51, 51));
@@ -84,7 +83,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
             }
         });
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/caneta.png"))); // NOI18N
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/em-formacao.png"))); // NOI18N
         jMenu3.setText("área de Cadastro");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +119,17 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/interface.png"))); // NOI18N
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/trabalhos (1).png"))); // NOI18N
+        jMenu4.setText("área de vagas");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/encontrar.png"))); // NOI18N
         jMenu2.setText("área de busca");
         jMenu2.setToolTipText("");
         jMenu2.setFocusable(false);
@@ -131,22 +140,12 @@ public class dsVanilla_Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/maleta.png"))); // NOI18N
-        jMenu4.setText("área de vagas");
-        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/comunicacoes.png"))); // NOI18N
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/comente.png"))); // NOI18N
         jMenu5.setText("fale conosco");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/formas-e-simbolos.png"))); // NOI18N
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/informacao (1).png"))); // NOI18N
         jMenu6.setText("sobre");
         jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jMenuBar1.add(jMenu6);
@@ -169,9 +168,8 @@ public class dsVanilla_Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(524, 621, Short.MAX_VALUE))
-            .addComponent(desk, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(desk, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

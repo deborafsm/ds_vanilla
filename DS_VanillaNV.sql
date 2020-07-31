@@ -25,11 +25,8 @@ CREATE TABLE pessoas(
     grau_esc varchar(200)
     
 );
-SELECT * from pessoas;
-Select nome, email, celular , telefone,endereco,cidade,estado from pessoas
 
 alter table pessoas add column endereco varchar(200);
-
 CREATE TABLE empresa(
 id INT PRIMARY KEY AUTO_INCREMENT,
 razao_social VARCHAR(100) unique,
@@ -43,33 +40,18 @@ email varchar(70)
 
 );
 drop table empresa;
-create table vaga(
+
+create table vagas(
 cod_vaga int primary key auto_increment,
-tipo_oportunidade varchar(50),
-curso varchar(50),
-requisitos varchar(200),
-beneficios varchar(200),
-hora varchar(5),
-local_vaga varchar(50),
-tipoVaga VARCHAR(40),
-salario FLOAT(3,2),
-cargo VARCHAR(20),
-horario VARCHAR(4)
+data_vaga varchar(200),
+nome_empregador varchar(200),
+titulo varchar(200),
+descricao varchar(200),
+celular varchar(200),
+telefone varchar(200),
+email VARCHAR(200)
+
 );
-select * from empresa;
-alter table vaga
-CHARACTER SET = utf8 , ENGINE = InnoDB;
 
-
-alter table vaga
-CHARACTER SET = utf8 , ENGINE = InnoDB ;
-
-alter table empresa
-CHARACTER SET = utf8 , ENGINE = InnoDB ;
-
-insert into usuarios values(1,"deborafsm","12345");
 
 select * from usuarios;
-
-select * from empresa;
-Select razao_social,rua,email,primeiro_tel,segundo_tel from empresa;

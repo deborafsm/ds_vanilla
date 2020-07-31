@@ -58,7 +58,7 @@ public class dao_vagas {
 
     //Select
     public List<model_vagas> select() {
-        String sql = "select  id, data_vaga, nome_empregador, titulo, descricao, celular, telefone, email\n" +
+        String sql = "select  cod_vaga, data_vaga, nome_empregador, titulo, descricao, celular, telefone, email\n" +
 " from vagas";
         List<model_vagas> listOp = new ArrayList<>();
         try {
@@ -67,8 +67,7 @@ public class dao_vagas {
             while (rs.next()) {
 
                 model_vagas vagas = new model_vagas();
-                vagas.setId(rs.getString("id"));
-                vagas.setDate(rs.getString("data_vaga"));
+                vagas.setId(rs.getString("cod_vaga"));
                 vagas.setNome(rs.getString("nome_empregador"));
                 vagas.setTitulo(rs.getString("titulo"));
                 vagas.setDescricao(rs.getString("descricao"));
@@ -89,7 +88,7 @@ public class dao_vagas {
     //Remover
      public void delete(model_vagas op) {
         PreparedStatement ps = null;
-        String sql = "DELETE FROM vagas WHERE id = ?";
+        String sql = "DELETE FROM vagas WHERE cod_vaga = ?";
 
         try {//tenta fazer a logica abaixo
             ps = con.prepareStatement(sql);
