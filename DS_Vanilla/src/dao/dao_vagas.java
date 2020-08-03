@@ -58,7 +58,7 @@ public class dao_vagas {
 
     //Select
     public List<model_vagas> select() {
-        String sql = "select  cod_vaga, data_vaga, nome_empregador, titulo, descricao, celular, telefone, email\n" +
+        String sql = "select  cod_vaga, titulo, descricao, nome_empregador, celular, telefone, email\n" +
 " from vagas";
         List<model_vagas> listOp = new ArrayList<>();
         try {
@@ -68,9 +68,9 @@ public class dao_vagas {
 
                 model_vagas vagas = new model_vagas();
                 vagas.setId(rs.getString("cod_vaga"));
-                vagas.setNome(rs.getString("nome_empregador"));
                 vagas.setTitulo(rs.getString("titulo"));
                 vagas.setDescricao(rs.getString("descricao"));
+                vagas.setNome(rs.getString("nome_empregador"));
                 vagas.setCelular(rs.getString("celular"));
                 vagas.setTelefone(rs.getString("telefone"));
                 vagas.setEmail(rs.getString("email"));
