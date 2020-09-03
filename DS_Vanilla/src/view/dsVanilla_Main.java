@@ -42,6 +42,7 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
 
@@ -138,6 +139,14 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         jMenuItem1.setText("Empresas");
         jMenu2.add(jMenuItem1);
 
+        jMenuItem4.setText("Curriculos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
         jMenuBar1.add(jMenu2);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/comente.png"))); // NOI18N
@@ -218,6 +227,13 @@ public class dsVanilla_Main extends javax.swing.JFrame {
         desk.add(vagas);
     }//GEN-LAST:event_jMenu4MouseClicked
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        dsVanilla_cv  cv = new dsVanilla_cv();
+        cv.setVisible(true);
+        desk.add(cv);
+// dsVanilla_cv
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,5 +282,6 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
