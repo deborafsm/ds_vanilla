@@ -20,18 +20,16 @@ import model.model_empresa;
  * @author DeboraDev
  */
 public class dao_empresa_cadastro {
-
+    //Conexao
     private Connection con = null;
-
+    
     public dao_empresa_cadastro() {
+        //a variavel con (recebe a conexão com o banco de dados)
         con = dsVanilla_ConnectionFactory.getConnection();
     }
-    //Adiciona empresa no banco de dados
-
+    
+    //Classe que adiciona uma empresa no banco de dados
     public void insert(model_empresa empresa) {
-
-        Connection con = dsVanilla_ConnectionFactory.getConnection();
-
         PreparedStatement stmt = null;
 
         try {
@@ -57,6 +55,7 @@ public class dao_empresa_cadastro {
     }
 
     //Seleciona empresas
+    
     public List<model_empresa> select() {
         String sql = "Select id, razao_social, nome_fantasia, cnpj, rua, primeiro_tel, segundo_tel, email from empresa";
         PreparedStatement ps = null;
@@ -88,6 +87,7 @@ public class dao_empresa_cadastro {
     }
 
     //Pesquisa empresa
+    
     public java.util.List<model_empresa> findeEmpr(String nome) {
         PreparedStatement ps = null;
         ResultSet rs = null;

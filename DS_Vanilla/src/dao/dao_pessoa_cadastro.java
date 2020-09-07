@@ -68,7 +68,7 @@ public class dao_pessoa_cadastro {
     //Select 
     public List<model_pessoa> select() {
 
-        String sql = "Select  nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
+        String sql = "Select id_pessoa,nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_pessoa> listPessoa = new ArrayList<>();
@@ -77,6 +77,7 @@ public class dao_pessoa_cadastro {
             rs = ps.executeQuery();
             while (rs.next()) {
                 model_pessoa pessoa = new model_pessoa();
+                pessoa.setId(rs.getString("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setSexo(rs.getString("sexo"));
                 pessoa.setTelefone(rs.getString("telefone"));
@@ -160,7 +161,7 @@ public class dao_pessoa_cadastro {
     }
     public void update(model_pessoa pessoa){
         PreparedStatement ps = null;
-        String sql = "UPDATE pessoa SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
+        String sql = "UPDATE pessoas SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
                 + ", estado_civil= ?, tipo_contrato= ?, cep= ?, endereco= ?, cidade= ?, estado= ?, grau_esc = ? WHERE id_pessoa = ?";
         try {
             ps = con.prepareStatement(sql); 
