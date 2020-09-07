@@ -58,8 +58,8 @@ Ilustra e descreve a funcionalidade do sistema
 O usuario Loga com usuário senha assim que executar o sistema, navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
 
 
-<img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="600"/>
-
+<img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="460"/>
+<img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="460"/>
 
 
 # Empresas 
