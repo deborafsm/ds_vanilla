@@ -58,7 +58,7 @@ Ilustra e descreve a funcionalidade do sistema
 O usuario Loga com usuário e senha , navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
 
 
-<<<<<<< HEAD
+
 <img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="600"/>
 
 
@@ -80,10 +80,9 @@ editar os dados e em seguida clicar no botão Editar.
 O usuario Loga com o usuario e senha, navegando pelo menu superior clique no profissional cadastrado, ou pesquise pelo nome assim selecionado
 Clique sobre Remover Usuário.
 
-=======
+
 <img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="460"/>
 <img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="460"/>
->>>>>>> ca11631b949a66a9bc0d3c942343c47fce7368b4
 
 
 # Empresas 
