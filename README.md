@@ -53,12 +53,31 @@ Premium
 # Casos de Uso 
 Ilustra e descreve a funcionalidade do sistema
 
-# Caso de Uso - (Cadastrar Profissional)
+# Cenario Cadastrar Candidato
 
-O usuario Loga com usuário senha assim que executar o sistema, navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
+O usuario Loga com usuário e senha , navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
 
 
-<img src="C:\Users\Debora\Desktop\ds_vanilla\Documentos_Sistema\Telas\Cadastrar.PNG" width="460"/>
+<img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/Cadastrar.PNG" width="600"/>
+
+
+<img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Telas/CapturarCandidato.PNG" width="600"/>
+
+# Cenario Selecionando Candidato
+
+Clique sobre a tabela no profissional cadastrado, ou pesquise pelo nome.
+
+<img src="https://github.com/deborafsm\ds_vanilla\Documentos_Sistema\Telas\Selecionando.PNG" width="600"/>
+
+
+# Cenario Editar Candidato
+
+O usuario Loga com o usuario e senha, navegando pelo menu superior clique no profissional cadastrado, ou pesquise pelo nome assim selecionado
+editar os dados e em seguida clicar no botão Editar.
+
+# Cenario Remover Candidato
+O usuario Loga com o usuario e senha, navegando pelo menu superior clique no profissional cadastrado, ou pesquise pelo nome assim selecionado
+Clique sobre Remover Usuário.
 
 
 

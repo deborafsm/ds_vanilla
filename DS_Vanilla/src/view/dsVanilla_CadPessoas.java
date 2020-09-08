@@ -129,6 +129,7 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         brnadd = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -427,6 +428,13 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         jLabel5.setText("ID:");
 
+        jButton4.setText("Limpar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -456,7 +464,9 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jButton1)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -481,7 +491,8 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(brnadd)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -578,6 +589,10 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         dao.remove(pessoa);
         readJtable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        limpar();
+    }//GEN-LAST:event_jButton4ActionPerformed
     public void campos(model_pessoa pessoa) {
         pessoa.setNome(txtnome.getText());
         pessoa.setTelefone(txttel.getText());
@@ -618,6 +633,7 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
