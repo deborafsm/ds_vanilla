@@ -53,6 +53,7 @@ Premium
 # Casos de Uso 
 Ilustra e descreve a funcionalidade do sistema
 
+<img src="https://github.com/deborafsm/ds_vanilla/Documentos_Sistema/Diagramas/RCU.PNG" width="460"/>
 # Cenario Cadastrar Candidato
 
 O usuario Loga com usuário e senha , navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
