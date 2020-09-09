@@ -54,6 +54,9 @@ Premium
 Ilustra e descreve a funcionalidade do sistema
 
 <img src="https://github.com/deborafsm/ds_vanilla/blob/master/Documentos_Sistema/Diagramas/RCU.PNG" width="460"/>
+# Diagrama de Banco de Dados
+
+<img src=""""/>
 # Cenario Cadastrar Candidato
 
 O usuario Loga com usuário e senha , navega pelo menu superior preenche os campos e clicando em adicionar incere um novo candidato.
