@@ -66,7 +66,7 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
     }
 
     private void campos(model_vagas vagas) {
-        vagas.setDate(txtData.getText());
+       
         vagas.setNome(txtNome.getText());
         vagas.setTitulo(txtTitulo.getText());
         vagas.setDescricao(txtDesc.getText());
@@ -459,7 +459,13 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       model_vagas vagas = new model_vagas();
+        dao_vagas dao = new dao_vagas();
+        campos(vagas);
+        vagas.setId(tblVagas.getValueAt(tblVagas.getSelectedRow(), 0).toString());
+        dao.update(vagas);
+        readJtable();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -479,7 +485,15 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jScrollPane3MouseClicked
 
     private void tblVagasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVagasKeyReleased
-         
+          if (tblVagas.getSelectedRow() != -1) {
+            txtId.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 0).toString());
+            txtTitulo.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 1).toString());
+            txtDesc.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 2).toString());
+            txtNome.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 3).toString());
+            txtCel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 4).toString());
+            txtTel.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 5).toString());
+            txtEmail.setText(tblVagas.getValueAt(tblVagas.getSelectedRow(), 6).toString());
+        }
     }//GEN-LAST:event_tblVagasKeyReleased
 
     private void tblVagasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVagasMouseClicked

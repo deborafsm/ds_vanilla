@@ -38,7 +38,7 @@ public class dao_vagas {
 
         try {
             stmt = con.prepareStatement("INSERT INTO vagas (data_vaga, nome_empregador, titulo, descricao, celular, telefone, email)VALUES(?,?,?,?,?,?,?)");
-            stmt.setString(1, vagas.getDate());
+            stmt.setString(1, vagas.getId());
             stmt.setString(2, vagas.getNome());
             stmt.setString(3, vagas.getTitulo());
             stmt.setString(4, vagas.getDescricao());
@@ -97,6 +97,30 @@ public class dao_vagas {
             JOptionPane.showMessageDialog(null, "Vaga excluida com sucesso"); 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e);
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
+        }
+    }
+     //Edit
+     public void update(model_vagas vagas) {
+        PreparedStatement ps = null;
+        //update  titulo, descricao, nome_empregador, celular, telefone, email
+        String sql = "UPDATE vagas SET titulo =?, descricao =?, nome_empregador =?, celular =?, telefone =?,"
+                + " email =? WHERE cod_vaga =?;";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, vagas.getId());
+            ps.setString(2, vagas.getNome());
+            ps.setString(3, vagas.getTitulo());
+            ps.setString(4, vagas.getDescricao());
+            ps.setString(5, vagas.getCelular());
+            ps.setString(6, vagas.getTelefone());
+            ps.setString(7, vagas.getEmail());
+
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Dados foram alterados com sucesso.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro:" + e);
         } finally {
             dsVanilla_ConnectionFactory.closeConnection(con, ps);
         }

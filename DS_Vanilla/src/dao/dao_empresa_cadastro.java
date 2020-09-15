@@ -140,7 +140,7 @@ public class dao_empresa_cadastro {
         }
     }
 
-    //edit
+    //update
     public void update(model_empresa empresa) {
         PreparedStatement ps = null;
         String sql = "UPDATE empresa SET razao_social =?, nome_fantasia=?, cnpj=?, rua=?,  "

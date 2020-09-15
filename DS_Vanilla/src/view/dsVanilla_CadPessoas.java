@@ -11,7 +11,7 @@ import model.model_pessoa;
 
 /**
  *
- * @author Usuário
+ * @author Debora Freire
  */
 public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
@@ -20,18 +20,17 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
      */
     public dsVanilla_CadPessoas() {
         initComponents();
-        readJtable();
+        readJtable(); // inicializa com a tabela apartir do banco de dados
     }
-
-    //Table model
+    //Table model mostra dados do banco de dados 
     public void readJtable() {
-
+        //Tabela Padrão como modelo
         DefaultTableModel model = (DefaultTableModel) tblPessoa.getModel();
-        model.setNumRows(0);
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-
+        model.setNumRows(0);//Começa com 0 de linha
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();//Inst para acesso select
+        //seleciona pessoa 
         dao.select().forEach((pessoa) -> {
-            //Ta errado
+            //Oque vai selecionar dentro da tabela
             model.addRow(new Object[]{
                 pessoa.getId(),
                 pessoa.getNome(),
@@ -51,13 +50,14 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
             });
         });
     }
-
-    public void FindOperador(String nome) {
+    //Pesquisa Candidato
+    public void findCandidato(String nome) {//Apartir do nome 
+        //Tabela padão
         DefaultTableModel model = (DefaultTableModel) tblPessoa.getModel();
-        model.setNumRows(0);
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-        dao.findPessoas(nome).forEach((pessoa) -> {
-            //Ta errado
+        model.setNumRows(0);//num de linhas iniciais
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();//Inst de cadastro obj
+        dao.findPessoas(nome).forEach((pessoa) -> {//ForEach para passar pelo dados
+            //Oque será mostrado quando o candidato ser pesquisado
             model.addRow(new Object[]{
                 pessoa.getId(),
                 pessoa.getNome(),
@@ -509,21 +509,21 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Adiciona Pesso
     private void brnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnaddActionPerformed
-        model_pessoa pessoa = new model_pessoa();
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-        campos(pessoa);
-        dao.insert(pessoa);
-        readJtable();
+        model_pessoa pessoa = new model_pessoa();//inst de Candidato (atributos)
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();//Inst (CRUD)
+        campos(pessoa);//Campos do formulário
+        dao.insert(pessoa);//Insere Candidato
+        readJtable();//Atualiza a tabela 
     }//GEN-LAST:event_brnaddActionPerformed
-
+    //Botão para pesquisa de Candidatos
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Ao clicar no botao
-        //Pesquisa o usuario
-        //Seta todos os valores 
+        //Model para atributos do candidato
         model_pessoa pessoa = new model_pessoa();
+        //Dao para o CRUD no banco de dados
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        //Método pesquisa Candidato
         dao.findPessoas(txtnome.getText());
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -532,10 +532,11 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButton3MouseClicked
-
+    //Comportamento da tabela
     private void tblPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblPessoaKeyReleased
-
+        //Se a tabela não estiver selecionada
         if (tblPessoa.getSelectedRow() != -1) {
+            //Mostra os seguintes dados
             txtID.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(),0).toString());
             txtnome.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 1).toString());
             txttel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 2).toString());
@@ -553,9 +554,11 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_tblPessoaKeyReleased
-
+    //Quando o candidato é clicado
     private void tblPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPessoaMouseClicked
+        //Se não estiver clicado 
         if (tblPessoa.getSelectedRow() != -1) {
+            //Mostra dados obtidos dentro do campo de texto
             txtID.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(),0).toString());
             txtnome.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 1).toString());
             txttel.setText(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 2).toString());
@@ -573,26 +576,39 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_tblPessoaMouseClicked
-
+    //Update dados
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Inst pessoa 
         model_pessoa pessoa = new model_pessoa();
+        //Inst Dao para CRUD
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        //Apartir do ID da pessoa a mesma é atualizada
         pessoa.setId(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0).toString());
+        //Atualiza todos os campos que foram alterados    
         campos(pessoa);
+        //Chama metodo atualizar
         dao.update(pessoa);
+        //Atualiza tabela 
+        readJtable();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //Remove pessoa
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Inst de pessoa 
         model_pessoa pessoa = new model_pessoa();
+        //dao do crud
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        //Apartir do ID se deleta uma pessoa
         pessoa.setId(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0).toString());
+        //Chama o metodo que remove pessoa
         dao.remove(pessoa);
+        //Atualiza tabela 
         readJtable();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    //Limpa Campos
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        limpar();
+        limpar();//Chama função que limpa os dados do formulário
     }//GEN-LAST:event_jButton4ActionPerformed
+    //Função que lista dos dos campo de candidato
     public void campos(model_pessoa pessoa) {
         pessoa.setNome(txtnome.getText());
         pessoa.setTelefone(txttel.getText());
@@ -609,9 +625,8 @@ public class dsVanilla_CadPessoas extends javax.swing.JInternalFrame {
         pessoa.setCidade(cbocidade.getSelectedItem().toString());
         pessoa.setGrau_esc(cboEsco.getSelectedItem().toString());
     }
-
+    //Campo que limpa campos
     public void limpar() {
-
         txtnome.setText("");
         txtcel.setText("");
         txttel.setText("");

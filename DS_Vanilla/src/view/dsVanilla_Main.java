@@ -9,7 +9,7 @@ import java.awt.Point;
 
 /**
  *
- * @author jobhome
+ * @author Débora Freire
  */
 public class dsVanilla_Main extends javax.swing.JFrame {
 

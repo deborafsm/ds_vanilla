@@ -19,17 +19,23 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
      * Creates new form dsVanilla_CadastroEmpresa
      */
     public dsVanilla_CadastroEmpresa() {
+        //Inicia componentes
         initComponents();
+        //Juntamente com os dados do banco de dado se tiver
         readJtable();
     }
-    
-    public void readJtable() {
-        DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
-        model.setNumRows(0);
-        dao_empresa_cadastro empresa = new dao_empresa_cadastro();
 
+    //Função que cria tabela para visualização dentro do sistem
+    public void readJtable() {
+        //Tabela Padrão 
+        DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
+        //Model inicia com 0 de linhas
+        model.setNumRows(0);
+        //Int de dao para CRUD dentro do banco de dados
+        dao_empresa_cadastro empresa = new dao_empresa_cadastro();
+        // forEach é usado para passar pelos objetos
         empresa.select().forEach((empr) -> {
-            // for é usado para passar pelos objetos
+            //Lista os seguintes itens
             model.addRow(new Object[]{
                 empr.getId(),
                 empr.getRazao_social(),
@@ -43,11 +49,15 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         });
     }
 
+    //Função Pesquisa empresas
     public void FindEmpr(String nome) {
+        //Tabela padrão
         DefaultTableModel model = (DefaultTableModel) tblEmpresa.getModel();
+        //Inicia com 0 de linhas
         model.setNumRows(0);
+        //Dao para crud no banco de dados
         dao_empresa_cadastro dao = new dao_empresa_cadastro();
-
+        //pesquisa a empresa através do nome
         dao.findeEmpr(nome).forEach((emp) -> {
             model.addRow(new Object[]{
                 //Chama os itens 
@@ -410,44 +420,45 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Botão que insere uma empresa no banco de dados
     private void btnAddEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmpresaActionPerformed
+      
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
         campos(modelEmpresa);//Campos estão dentro de uma função
         daoEmpresa.insert(modelEmpresa); // dao de empresa para inserir uma nova empresa no Banco de dados
-        readJtable();
-        zeraCampo();
+        readJtable();//Atualiza dados do banco de dados
+        zeraCampo();//Limpa campos dos formulários
     }//GEN-LAST:event_btnAddEmpresaActionPerformed
-
+    //Botão que Exclui uma empresa do banco de dados
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
-        modelEmpresa.setId(txtId.getText());
-        daoEmpresa.delete(modelEmpresa);
-        readJtable();
-        zeraCampo();
+        modelEmpresa.setId(txtId.getText());//Pega o id da empresa para exclusão da empres
+        daoEmpresa.delete(modelEmpresa);//Faz a chamada para remoção da empresa no banco de dados
+        readJtable();//Atualiza dados do banco de dados
+        zeraCampo();//Limpa campos dos formulários
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEmpresaActionPerformed
         model_empresa modelEmpresa = new model_empresa();//Instancia de model empresa - Getters e Setters
         dao_empresa_cadastro daoEmpresa = new dao_empresa_cadastro();//Instancia da classe dao de Empresa "CRUD"
-        campos(modelEmpresa);
-        daoEmpresa.update(modelEmpresa);
-        readJtable();
-        zeraCampo();
+        campos(modelEmpresa);//campos  para fazer o update
+        daoEmpresa.update(modelEmpresa);//Atualiza empress
+        readJtable();//Atualiza dados do bando de dados
+        zeraCampo();//Limpa campos dos formularios
     }//GEN-LAST:event_btnEditarEmpresaActionPerformed
-
+    //Botão que pesquisa empresa dentro do banco de dados
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        FindEmpr(txtPesquisa.getText());
-       
+        FindEmpr(txtPesquisa.getText());//Função que busca empresas no banco de dados
+
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaActionPerformed
-
+    //preenchimento com os dados apartir da tabela
     private void tblEmpresaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEmpresaKeyReleased
         if (tblEmpresa.getSelectedRow() != -1) {
             txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
@@ -461,7 +472,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_tblEmpresaKeyReleased
-
+    //preenchimento com os dados apartir da tabela
     private void tblEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpresaMouseClicked
         if (tblEmpresa.getSelectedRow() != -1) {
             txtId.setText(tblEmpresa.getValueAt(tblEmpresa.getSelectedRow(), 0).toString());
@@ -475,6 +486,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_tblEmpresaMouseClicked
+    //Função com os campos
     private void campos(model_empresa empresa) {
         empresa.setRazao_social(txtRazaoSocial.getText());
         empresa.setNome_fantasia(txtNomeFantasia.getText());
@@ -485,7 +497,7 @@ public class dsVanilla_CadastroEmpresa extends javax.swing.JInternalFrame {
         empresa.setEmail(txtEmail.getText());
 
     }
-
+    //Função que limpa campos do formulário
     private void zeraCampo() {
         txtRazaoSocial.setText("");
         txtNomeFantasia.setText("");
