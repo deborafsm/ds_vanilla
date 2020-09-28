@@ -440,6 +440,7 @@ public class dsVanilla_Vagas extends javax.swing.JInternalFrame {
         dao_vagas dao = new dao_vagas();
         campos(vagas);
         dao.insert(vagas);
+        readJtable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed

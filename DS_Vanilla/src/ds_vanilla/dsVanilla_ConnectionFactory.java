@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author jobhome
+ * @author Débora
  */
 public class dsVanilla_ConnectionFactory {
 

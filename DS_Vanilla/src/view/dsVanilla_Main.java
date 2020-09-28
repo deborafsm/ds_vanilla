@@ -228,9 +228,9 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        dsVanilla_cv  cv = new dsVanilla_cv();
-        cv.setVisible(true);
-        desk.add(cv);
+//        dsVanilla_cv  cv = new dsVanilla_cv();
+//        cv.setVisible(true);
+//        desk.add(cv);
 // dsVanilla_cv
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
