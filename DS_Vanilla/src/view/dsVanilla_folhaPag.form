@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
@@ -233,7 +233,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="txtFeriasId" linkSize="2" alignment="2" min="-2" pref="209" max="-2" attributes="0"/>
+                              <Component id="txtFeriasId" alignment="2" min="-2" pref="209" max="-2" attributes="0"/>
                               <Component id="txtDtInd" linkSize="1" alignment="2" pref="212" max="32767" attributes="0"/>
                               <Component id="txtSaldoSal" linkSize="1" alignment="2" max="32767" attributes="0"/>
                               <Component id="txt13" linkSize="1" alignment="2" max="32767" attributes="0"/>
