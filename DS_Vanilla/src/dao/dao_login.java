@@ -18,7 +18,7 @@ import model.model_login;
  */
 public class dao_login {
 
-    public boolean logar(String login, String senha) {
+    public boolean logar(String login, String senha, String perfil) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
         PreparedStatement ps = null;
@@ -26,9 +26,10 @@ public class dao_login {
 
         boolean logar = false;
         try {
-            ps = con.prepareStatement("SELECT * FROM  usuarios WHERE login = ? AND senha = ?");
+            ps = con.prepareStatement("SELECT * FROM  usuarios WHERE login = ? AND senha = ? AND perfil = ?");
             ps.setString(1, login);
             ps.setString(2, senha);
+            ps.setString(3, perfil);
             rs = ps.executeQuery();
             if (rs.next()) {
                 logar = true;
@@ -39,6 +40,10 @@ public class dao_login {
             dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
         }
         return logar;
+    }
+
+    public boolean logar(String text, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

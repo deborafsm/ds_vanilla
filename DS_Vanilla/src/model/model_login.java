@@ -12,6 +12,7 @@ package model;
 public class model_login {
    private String login;
    private String senha;
+   private String perfil;
 
     public model_login() {
     }
@@ -20,6 +21,13 @@ public class model_login {
         this.login = login;
         this.senha = senha;
     }
+
+    public model_login(String login, String senha, String perfil) {
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
+    
 
     public String getLogin() {
         return login;
@@ -35,6 +43,14 @@ public class model_login {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
    
    

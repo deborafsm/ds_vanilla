@@ -30,7 +30,10 @@ public class model_pessoa {
     private String estado;
     private String grau_esc;
     private String endereco;
-
+    private String salario;
+    private String cargo;
+    private String status;
+    
     public model_pessoa() {
     }
 
@@ -186,6 +189,30 @@ public class model_pessoa {
 
     public void setIdade(String idade) {
         this.idade = idade;
+    }
+
+    public String getSalario() {
+        return salario;
+    }
+
+    public void setSalario(String salario) {
+        this.salario = salario;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
         
     
