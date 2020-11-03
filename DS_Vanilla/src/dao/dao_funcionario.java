@@ -48,22 +48,42 @@ public class dao_funcionario {
         }
     }
     public void update(model_pessoa pessoa){//atualiza salario e status
+        PreparedStatement ps = null;
+        //update  titulo, descricao, nome_empregador, celular, telefone, email
+        String sql = "UPDATE pessoas SET nome = ?, celular = ?, email = ?,tipo_contrato = ? , endereco = ?, cargo= ?,"
+                + " salario = ?, status_funcionario = ? WHERE id_pessoa =?;";
         try {
-            
+            ps = con.prepareStatement(sql);
+            ps.setString(1, pessoa.getId());
+            ps.setString(2, pessoa.getNome());
+            ps.setString(3, pessoa.getCelular());
+            ps.setString(4, pessoa.getEmail());
+            ps.setString(5, pessoa.getTipo_contrato());
+            ps.setString(6, pessoa.getEndereco());
+            ps.setString(7, pessoa.getSalario());
+            ps.setString(8, pessoa.getStatus());
+
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Dados foram alterados com sucesso.");
         } catch (Exception e) {
-        }finally{
-            
+            JOptionPane.showMessageDialog(null, "Erro:" + e);
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
         }
     }
     public void remove(model_pessoa pessoa){//remove salário
         PreparedStatement ps = null;
-        String sql = "";
+        String sql = "DELETE FROM pessoa WHERE id_pessoa = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pessoa.getId());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Salario foi removido");
             
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro: ");
+        }finally{
+            dsVanilla_ConnectionFactory.closeConnection(con);
         }
                
     }
