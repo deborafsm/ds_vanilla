@@ -11,14 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.model_login;
-
 /**
  *
  * @author Débora FSM
  */
 public class dao_login {
-
-    public boolean logar(String login, String senha, String perfil) {
+    model_login user = new model_login();
+    public boolean logar(String login, String senha) {
 
         Connection con = dsVanilla_ConnectionFactory.getConnection();
         PreparedStatement ps = null;
@@ -26,10 +25,10 @@ public class dao_login {
 
         boolean logar = false;
         try {
-            ps = con.prepareStatement("SELECT * FROM  usuarios WHERE login = ? AND senha = ? AND perfil = ?");
+            ps = con.prepareStatement("SELECT login, senha  FROM  usuarios WHERE login = ? AND senha = ? ");
             ps.setString(1, login);
             ps.setString(2, senha);
-            ps.setString(3, perfil);
+            
             rs = ps.executeQuery();
             if (rs.next()) {
                 logar = true;
@@ -42,9 +41,22 @@ public class dao_login {
         return logar;
     }
 
-    public boolean logar(String text, String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
+//    public boolean logar(String text, String string) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+ 
+
+    
+    
+
+    
+
+    
+    
+
+    
 
     
 }

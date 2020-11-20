@@ -152,7 +152,7 @@ public class dao_pessoa_cadastro {
                 findeEmpr.add(pessoa);
             }
         } catch (Exception e) {
-            System.out.println("Erro ao pesquisar empresa. " + e);//Mostra o erro da logica, ja que só mostra algum resultado
+            System.out.println("Erro ao pesquisar candidato. " + e);//Mostra o erro da logica, ja que só mostra algum resultado
         } finally {
             dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
         }

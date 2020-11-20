@@ -33,18 +33,21 @@ public class model_pessoa {
     private String salario;
     private String cargo;
     private String status;
+    private String admissao;
+    private String demissao;
     
     public model_pessoa() {
     }
 
-    
-    public model_pessoa(String nome, String sexo, String telefone, String celular, String email, String data_nasc, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc) {
+    public model_pessoa(String id, String nome, String sexo, String telefone, String celular, String email, String data_nasc, String idade, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc, String endereco, String salario, String cargo, String status, String admissao, String demissao) {
+        this.id = id;
         this.nome = nome;
         this.sexo = sexo;
         this.telefone = telefone;
         this.celular = celular;
         this.email = email;
         this.data_nasc = data_nasc;
+        this.idade = idade;
         this.rg = rg;
         this.cpf = cpf;
         this.estado_civil = estado_civil;
@@ -53,8 +56,16 @@ public class model_pessoa {
         this.cidade = cidade;
         this.estado = estado;
         this.grau_esc = grau_esc;
+        this.endereco = endereco;
+        this.salario = salario;
+        this.cargo = cargo;
+        this.status = status;
+        this.admissao = admissao;
+        this.demissao = demissao;
     }
 
+    
+    
     public String getNome() {
         return nome;
     }
@@ -213,6 +224,22 @@ public class model_pessoa {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAdmissao() {
+        return admissao;
+    }
+
+    public void setAdmissao(String admissao) {
+        this.admissao = admissao;
+    }
+
+    public String getDemissao() {
+        return demissao;
+    }
+
+    public void setDemissao(String demissao) {
+        this.demissao = demissao;
     }
         
     

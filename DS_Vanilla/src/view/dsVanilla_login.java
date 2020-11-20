@@ -28,6 +28,12 @@ import model.model_login;
  */
 public class dsVanilla_login extends javax.swing.JFrame {
 
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    PreparedStatement pstadmin = null;
+    ResultSet rsadmin = null;
+
     private Point point = new Point();
     dao_login dao = new dao_login();
     model_login user = new model_login();
@@ -47,37 +53,9 @@ public class dsVanilla_login extends javax.swing.JFrame {
     public dsVanilla_login() {
         initComponents();
         // Color white
-        txtSenha.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, (new Color(235, 63, 63))));
-        txtLogin.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, (new Color(235, 63, 63))));
+        txtSenha.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (new Color(235, 63, 63))));
+        txtLogin.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, (new Color(235, 63, 63))));
 
-    }
-
-    public boolean logar(String login, String senha, String perfil) {
-
-        Connection con = dsVanilla_ConnectionFactory.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        boolean logar = false;
-        try {
-            ps = con.prepareStatement("SELECT * FROM  usuarios WHERE login = ? AND senha = ? AND perfil = ?");
-            ps.setString(1, login);
-            ps.setString(2, senha);
-            ps.setString(3, perfil);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                logar = true;
-            }
-        } catch (SQLException e) {
-            System.out.println("erro: " + e);
-        } finally {
-            dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
-        }
-        return logar;
-    }
-
-    public boolean logar(String text, String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -195,9 +173,9 @@ public class dsVanilla_login extends javax.swing.JFrame {
             btnLogarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnLogarLayout.createSequentialGroup()
                 .addComponent(ind_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(49, 49, 49)
                 .addComponent(lblHome1)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         btnLogarLayout.setVerticalGroup(
             btnLogarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,24 +194,24 @@ public class dsVanilla_login extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSenha))))
+                            .addComponent(txtSenha)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(66, 66, 66)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -254,9 +232,9 @@ public class dsVanilla_login extends javax.swing.JFrame {
                             .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(btnLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -295,37 +273,17 @@ public class dsVanilla_login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void lblHome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHome1MouseClicked
-
-
+        dao_login dao = new dao_login();
+        model_login user = new model_login();
+        if (dao.logar(txtLogin.getText(), new String(txtSenha.getPassword()))) {
+            new dsVanilla_Main().setVisible(true);
+            this.dispose();
+        } else {//Se não mostra o erro
+            JOptionPane.showMessageDialog(null, "Usuario ou Senha incorretos");
+        }
     }//GEN-LAST:event_lblHome1MouseClicked
 
     private void btnLogarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogarMousePressed
-//Logar o usuario
-        //        dao_login dao = new dao_login();
-        //        model_login user = new model_login();
-        //        dsVanilla_Main main = new dsVanilla_Main();
-        //        dsVanilla_CadPessoas cad = new dsVanilla_CadPessoas();
-        //        dsVanilla_Users users = new dsVanilla_Users();
-        //        //Se no banco de dados tiver login e senha correspondente abre a tela principal e fecha o login
-        //        String a = cboPerfil.getSelectedItem().toString();
-        //        if (dao.logar(txtLogin.getText(), new String(txtSenha.getPassword()))) {
-        //            new dsVanilla_Main().setVisible(true);
-        //            this.dispose();
-        //        } else {//Se não mostra o erro
-        //            JOptionPane.showMessageDialog(null, "Usuario ou Senha incorretos");
-        //        }        // TODO add your handling code here:
-        //
-        //        String perfil = users.getSelectedItem().toString();
-        //        if (perfil.equals("Administrador")) {
-        //            main.setVisible(true);
-        //            cad.setVisible(true);
-        //            users.setVisible(true);
-        //
-        //        } else if (perfil.equals("Agente")) {
-        //            main.desk.setEnabled(false);
-        //            cad.setVisible(false);
-        //            users.setVisible(false);
-        //        }
 
 
     }//GEN-LAST:event_btnLogarMousePressed
