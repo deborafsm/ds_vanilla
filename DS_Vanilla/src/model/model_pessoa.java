@@ -10,7 +10,7 @@ package model;
  * @author Usuário
  */
 public class model_pessoa {
-    
+
     //# id_pessoa, nome, sexo, telefone, celular, email, data_nasc, rg, cpf, estado_civil, 
     //tipo_contrato, cep, cidade, estado, grau_esc
     private String id;
@@ -35,11 +35,19 @@ public class model_pessoa {
     private String status;
     private String admissao;
     private String demissao;
-    
+    private String CargaIni;
+    private String CargaFim;
+    private String NumDep;
+    private String NomePaiMae;
+    private String NomeMaePai;
+    private String TipoPessoa;
+    private String Area;
+    private String Pesquisa;
+
     public model_pessoa() {
     }
 
-    public model_pessoa(String id, String nome, String sexo, String telefone, String celular, String email, String data_nasc, String idade, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc, String endereco, String salario, String cargo, String status, String admissao, String demissao) {
+    public model_pessoa(String id, String nome, String sexo, String telefone, String celular, String email, String data_nasc, String idade, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc, String endereco, String salario, String cargo, String status, String admissao, String demissao, String CargaIni, String CargaFim, String NumDep, String NomePaiMae, String NomeMaePai, String TipoPessoa, String Area, String Pesquisa) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -62,10 +70,72 @@ public class model_pessoa {
         this.status = status;
         this.admissao = admissao;
         this.demissao = demissao;
+        this.CargaIni = CargaIni;
+        this.CargaFim = CargaFim;
+        this.NumDep = NumDep;
+        this.NomePaiMae = NomePaiMae;
+        this.NomeMaePai = NomeMaePai;
+        this.TipoPessoa = TipoPessoa;
+        this.Area = Area;
+        this.Pesquisa = Pesquisa;
     }
 
-    
-    
+    public String getNomePaiMae() {
+        return NomePaiMae;
+    }
+
+    public void setNomePaiMae(String NomePaiMae) {
+        this.NomePaiMae = NomePaiMae;
+    }
+
+    public String getNomeMaePai() {
+        return NomeMaePai;
+    }
+
+    public void setNomeMaePai(String NomeMaePai) {
+        this.NomeMaePai = NomeMaePai;
+    }
+
+    public String getTipoPessoa() {
+        return TipoPessoa;
+    }
+
+    public void setTipoPessoa(String TipoPessoa) {
+        this.TipoPessoa = TipoPessoa;
+    }
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String Area) {
+        this.Area = Area;
+    }
+
+    public String getCargaIni() {
+        return CargaIni;
+    }
+
+    public void setCargaIni(String CargaIni) {
+        this.CargaIni = CargaIni;
+    }
+
+    public String getCargaFim() {
+        return CargaFim;
+    }
+
+    public void setCargaFim(String CargaFim) {
+        this.CargaFim = CargaFim;
+    }
+
+    public String getNumDep() {
+        return NumDep;
+    }
+
+    public void setNumDep(String NumDep) {
+        this.NumDep = NumDep;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -241,7 +311,13 @@ public class model_pessoa {
     public void setDemissao(String demissao) {
         this.demissao = demissao;
     }
-        
-    
-    
+
+    public String getPesquisa() {
+        return Pesquisa;
+    }
+
+    public void setPesquisa(String Pesquisa) {
+        this.Pesquisa = Pesquisa;
+    }
+
 }

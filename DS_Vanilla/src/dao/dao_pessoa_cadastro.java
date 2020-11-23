@@ -22,6 +22,8 @@ import model.model_pessoa;
  */
 public class dao_pessoa_cadastro {
 
+    model_pessoa model = new model_pessoa();
+
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -31,28 +33,47 @@ public class dao_pessoa_cadastro {
     }
 
     public void insert(model_pessoa pessoa) {
-
+//# id_pessoa, nome, sexo, telefone, celular, email, data_nasc, rg, cpf, estado_civil,
+//tipo_contrato, cep, cidade, estado, grau_esc, endereco, cargo, status, salario, admissao,
+//carga_ini, carga_fim, num_dependentes
         Connection con = dsVanilla_ConnectionFactory.getConnection();
 
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO pessoas (nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado,"
-                    + " grau_esc,endereco)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            // nome_pai_mae,
+            //nome_mae_pai, tipoPessoa, area
+
+            stmt = con.prepareStatement("INSERT INTO pessoas ( nome, sexo, telefone, celular, "
+                    + "email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado, grau_esc, "
+                    + "endereco, cargo, "
+                    + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,nome_mae_pai,tipoPessoa,area)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getSexo());
             stmt.setString(3, pessoa.getTelefone());
             stmt.setString(4, pessoa.getCelular());
             stmt.setString(5, pessoa.getEmail());
-            stmt.setString(6, pessoa.getRg());
-            stmt.setString(7, pessoa.getCpf());
-            stmt.setString(8, pessoa.getEstado_civil());
-            stmt.setString(9, pessoa.getTipo_contrato());
-            stmt.setString(10, pessoa.getCep());
-            stmt.setString(11, pessoa.getCidade());
-            stmt.setString(12, pessoa.getEstado());
-            stmt.setString(13, pessoa.getGrau_esc());
-            stmt.setString(14, pessoa.getEndereco());
+            stmt.setString(6, pessoa.getData_nasc());
+            stmt.setString(7, pessoa.getRg());
+            stmt.setString(8, pessoa.getCpf());
+            stmt.setString(9, pessoa.getEstado_civil());
+            stmt.setString(10, pessoa.getTipo_contrato());
+            stmt.setString(11, pessoa.getCep());
+            stmt.setString(12, pessoa.getCidade());
+            stmt.setString(13, pessoa.getEstado());
+            stmt.setString(14, pessoa.getGrau_esc());
+            stmt.setString(15, pessoa.getEndereco());
+            stmt.setString(16, pessoa.getCargo());
+            stmt.setString(17, pessoa.getStatus());
+            stmt.setString(18, pessoa.getSalario());
+            stmt.setString(19, pessoa.getAdmissao());
+            stmt.setString(20, pessoa.getCargaIni());
+            stmt.setString(21, pessoa.getCargaFim());
+            stmt.setString(22, pessoa.getNumDep());
+            stmt.setString(23, pessoa.getNomeMaePai());
+            stmt.setString(24, pessoa.getNomePaiMae());
+            stmt.setString(25, pessoa.getTipoPessoa());
+            stmt.setString(26, pessoa.getArea());
 
             stmt.executeUpdate();
 
@@ -68,7 +89,10 @@ public class dao_pessoa_cadastro {
     //Select 
     public List<model_pessoa> select() {
 
-        String sql = "Select id_pessoa,nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc from pessoas";
+        String sql = "Select id_pessoa,nome, sexo, telefone, celular, "
+                + "email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado, grau_esc, "
+                + "endereco, cargo, "
+                + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,nome_mae_pai,tipoPessoa,area from pessoas";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_pessoa> listPessoa = new ArrayList<>();
@@ -83,6 +107,7 @@ public class dao_pessoa_cadastro {
                 pessoa.setTelefone(rs.getString("telefone"));
                 pessoa.setCelular(rs.getString("celular"));
                 pessoa.setEmail(rs.getString("email"));
+                pessoa.setData_nasc(rs.getString("data_nasc"));
                 pessoa.setRg(rs.getString("rg"));
                 pessoa.setCpf(rs.getString("cpf"));
                 pessoa.setEstado_civil(rs.getString("estado_civil"));
@@ -92,6 +117,17 @@ public class dao_pessoa_cadastro {
                 pessoa.setCidade(rs.getString("cidade"));
                 pessoa.setEstado(rs.getString("estado"));
                 pessoa.setGrau_esc(rs.getString("grau_esc"));
+                pessoa.setCargo(rs.getString("cargo"));
+                pessoa.setStatus(rs.getString("status"));
+                pessoa.setSalario(rs.getString("salario"));
+                pessoa.setAdmissao(rs.getString("admissao"));
+                pessoa.setCargaIni(rs.getString("carga_ini"));
+                pessoa.setCargaFim(rs.getString("carga_fim"));
+                pessoa.setNumDep(rs.getString("num_dependentes"));
+                pessoa.setNomePaiMae(rs.getString("nome_pai_mae"));
+                pessoa.setNomeMaePai(rs.getString("nome_mae_pai"));
+                pessoa.setTipoPessoa(rs.getString("tipoPessoa"));
+                pessoa.setArea(rs.getString("area"));
 
                 listPessoa.add(pessoa);
             }
@@ -121,50 +157,15 @@ public class dao_pessoa_cadastro {
         }
     }
 
-    //Find
-    public java.util.List<model_pessoa> findPessoas(String nome) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        //Array lista adicionada
-        java.util.List<model_pessoa> findeEmpr = new ArrayList<>(); //Array de empresas
-        try {   //seleciona por nome do empresa 
-            ps = con.prepareStatement("SELECT id_pessoa, nome, sexo, telefone, celular, email, rg, cpf, estado_civil, tipo_contrato, cep, endereco, cidade, estado, grau_esc FROM pessoas WHERE nome like ?"); //Seleciona tdo de empresas
-            ps.setString(1, "%" + nome + "%");// ? = nome
-            rs = ps.executeQuery(); //Result set para se obter o resultado
-            while (rs.next()) {//Enquando tiver resultado (linhas)
-                model_pessoa pessoa = new model_pessoa();
-                pessoa.setId(rs.getString("id_pessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setSexo(rs.getString("sexo"));
-                pessoa.setTelefone(rs.getString("telefone"));
-                pessoa.setCelular(rs.getString("celular"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setData_nasc(rs.getString("data_nasc"));
-                pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getString("cpf"));
-                pessoa.setEstado_civil(rs.getString("estado_civil"));
-                pessoa.setTipo_contrato(rs.getString("tipo_contrato"));
-                pessoa.setCep(rs.getString("cep"));
-                pessoa.setEndereco(rs.getString("endereco"));
-                pessoa.setCidade(rs.getString("cidade"));
-                pessoa.setEstado(rs.getString("estado"));
-                pessoa.setGrau_esc(rs.getString("grau_esc"));
-                findeEmpr.add(pessoa);
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao pesquisar candidato. " + e);//Mostra o erro da logica, ja que só mostra algum resultado
-        } finally {
-            dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
-        }
-        //Retora o array 
-        return findeEmpr;
-    }
-    public void update(model_pessoa pessoa){
+    //Pesquisa
+    
+
+    public void update(model_pessoa pessoa) {
         PreparedStatement ps = null;
         String sql = "UPDATE pessoas SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
                 + ", estado_civil= ?, tipo_contrato= ?, cep= ?, endereco= ?, cidade= ?, estado= ?, grau_esc = ? WHERE id_pessoa = ?";
         try {
-            ps = con.prepareStatement(sql); 
+            ps = con.prepareStatement(sql);
             ps.setString(1, pessoa.getNome());
             ps.setString(2, pessoa.getSexo());
             ps.setString(3, pessoa.getTelefone());
@@ -175,15 +176,15 @@ public class dao_pessoa_cadastro {
             ps.setString(8, pessoa.getEstado_civil());
             ps.setString(9, pessoa.getTipo_contrato());
             ps.setString(10, pessoa.getCep());
-            ps.setString(11, pessoa.getEndereco()); 
+            ps.setString(11, pessoa.getEndereco());
             ps.setString(12, pessoa.getCidade());
             ps.setString(13, pessoa.getEstado());
             ps.setString(14, pessoa.getGrau_esc());
             ps.setString(15, pessoa.getId());
             ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Erro:   "+e);
-        }finally{
+            System.out.println("Erro:   " + e);
+        } finally {
             dsVanilla_ConnectionFactory.closeConnection(con, ps);
         }
     }
