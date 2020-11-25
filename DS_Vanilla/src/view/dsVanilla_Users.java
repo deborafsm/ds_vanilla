@@ -78,6 +78,11 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
             }
         });
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel3.setText("Usuário:");
@@ -173,6 +178,10 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

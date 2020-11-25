@@ -158,8 +158,6 @@ public class dao_pessoa_cadastro {
     }
 
     //Pesquisa
-    
-
     public void update(model_pessoa pessoa) {
         PreparedStatement ps = null;
         String sql = "UPDATE pessoas SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
@@ -184,6 +182,54 @@ public class dao_pessoa_cadastro {
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erro:   " + e);
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps);
+        }
+    }
+
+    public List<model_pessoa> quadro() {
+
+        String sql = "Select id_pessoa,nome, sexo, cargo,salario,status from pessoas";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<model_pessoa> listPessoa = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                model_pessoa pessoa = new model_pessoa();
+                pessoa.setId(rs.getString("id_pessoa"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setSexo(rs.getString("sexo"));
+                pessoa.setCargo(rs.getString("cargo"));
+                pessoa.setSalario(rs.getString("salario"));
+                pessoa.setStatus(rs.getString("status"));
+
+                listPessoa.add(pessoa);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro find all " + e);//mOSTRA o erro
+        } finally {
+            dsVanilla_ConnectionFactory.closeConnection(con, ps, rs);
+        }
+        return listPessoa;
+    }
+
+    public void updateQf(model_pessoa pessoa) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE pessoas SET  nome = ?, sexo = ? , cargo = ?, salario = ?, status = ? WHERE id_pessoa = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, pessoa.getNome());
+            ps.setString(2, pessoa.getSexo());
+            ps.setString(3, pessoa.getCargo());
+            ps.setString(4, pessoa.getSalario());
+            ps.setString(5, pessoa.getStatus());
+            ps.setString(6, pessoa.getId());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Dados Editados com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: "+e);
         } finally {
             dsVanilla_ConnectionFactory.closeConnection(con, ps);
         }
