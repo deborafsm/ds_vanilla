@@ -229,7 +229,7 @@ public class dao_pessoa_cadastro {
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Dados Editados com sucesso!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: "+e);
+            JOptionPane.showMessageDialog(null, "Error: " + e);
         } finally {
             dsVanilla_ConnectionFactory.closeConnection(con, ps);
         }

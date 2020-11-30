@@ -359,9 +359,9 @@ public class dsVanilla_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_lblUsuarioMouseClicked
 
     private void lblavisoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblavisoMouseClicked
-       dsVaniilla_email avisos = new dsVaniilla_email();
-        avisos.setVisible(true);
-        desk.add(avisos);
+        dsVanilla_Estoque estoque= new dsVanilla_Estoque();
+        estoque.setVisible(true);
+        desk.add(estoque);
     }//GEN-LAST:event_lblavisoMouseClicked
 
     private void btnEmpregoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpregoMousePressed

@@ -112,6 +112,8 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
         txtCod = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+
         jp1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblQf.setModel(new javax.swing.table.DefaultTableModel(

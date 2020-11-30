@@ -39,7 +39,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     public ds_funcionarios() {
         initComponents();
         JInternalFrame janela = new JInternalFrame();
-        ((BasicInternalFrameUI) janela.getUI()).setNorthPane(null); 
+        ((BasicInternalFrameUI) janela.getUI()).setNorthPane(null);
 //retirar o painel superior janela.setBorder(null);//retirar bordas
     }
 
@@ -308,7 +308,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel33))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(cboEsco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -697,7 +696,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                     .addComponent(txtNomepaiMae, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtmaePai, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -784,13 +782,14 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNomePesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3)))
                 .addGap(0, 1, Short.MAX_VALUE))
         );
 
@@ -850,7 +849,14 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+//        try {
+//            mod.setPesquisa(txtNomePesquisa.getText());
+//            model_pessoa model = control.findPessoas(mod);
+//            txtnome.setText(model.getNome());
+//
+//        } catch (SQLException ex) {
+//            System.out.println("ERRO " + ex);
+//        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -948,18 +954,14 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            mod.setPesquisa(txtNomePesquisa.getText());
-            model_pessoa model = control.findPessoas(mod);
-            txtnome.setText(model.getNome());
 
-        } catch (SQLException ex) {
-            System.out.println("ERRO " + ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jButton3AncestorAdded
-        // TODO add your handling code here:
+        model_pessoa pessoa = new model_pessoa();
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        campos(pessoa);
+        dao.insert(pessoa);
     }//GEN-LAST:event_jButton3AncestorAdded
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
