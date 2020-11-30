@@ -43,11 +43,12 @@ public class model_pessoa {
     private String TipoPessoa;
     private String Area;
     private String Pesquisa;
+    private String cnpj;
 
     public model_pessoa() {
     }
 
-    public model_pessoa(String id, String nome, String sexo, String telefone, String celular, String email, String data_nasc, String idade, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc, String endereco, String salario, String cargo, String status, String admissao, String demissao, String CargaIni, String CargaFim, String NumDep, String NomePaiMae, String NomeMaePai, String TipoPessoa, String Area, String Pesquisa) {
+    public model_pessoa(String id, String nome, String sexo, String telefone, String celular, String email, String data_nasc, String idade, String rg, String cpf, String estado_civil, String tipo_contrato, String cep, String cidade, String estado, String grau_esc, String endereco, String salario, String cargo, String status, String admissao, String demissao, String CargaIni, String CargaFim, String NumDep, String NomePaiMae, String NomeMaePai, String TipoPessoa, String Area, String Pesquisa, String cnpj) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -78,6 +79,15 @@ public class model_pessoa {
         this.TipoPessoa = TipoPessoa;
         this.Area = Area;
         this.Pesquisa = Pesquisa;
+        this.cnpj = cnpj;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getNomePaiMae() {

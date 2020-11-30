@@ -7,6 +7,7 @@ package view;
 
 import dao.dao_pessoa_cadastro;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.model_pessoa;
 
@@ -22,9 +23,9 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
     public dsVanilla_QuadroColaborador() {
         initComponents();
         readJtable();
-
+        
     }
-
+    
     public void readJtable() {
         //Tabela Padrão como modelo
         DefaultTableModel model = (DefaultTableModel) tblQf.getModel();
@@ -354,7 +355,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
         pessoa.setCargo(txtCargo.getText());
         pessoa.setSalario(txtSal.getText());
         pessoa.setStatus(cboStatus.getSelectedItem().toString());
-
+        
     }
     private void tblQfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblQfKeyPressed
         if (tblQf.getSelectedRow() != -1) {
@@ -365,7 +366,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             txtCargo.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 3).toString());
             txtSal.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 4).toString());
             cboStatus.setSelectedItem(tblQf.getValueAt(tblQf.getSelectedRow(), 5).toString());
-
+            
         }
     }//GEN-LAST:event_tblQfKeyPressed
 
@@ -378,7 +379,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             txtCargo.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 3).toString());
             txtSal.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 4).toString());
             cboStatus.setSelectedItem(tblQf.getValueAt(tblQf.getSelectedRow(), 5).toString());
-
+            
         }
 
     }//GEN-LAST:event_tblQfMouseClicked
@@ -388,11 +389,16 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        model_pessoa pessoa = new model_pessoa();
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-        campos(pessoa);
-        dao.updateQf(pessoa);
-        readJtable();
+        try {
+            model_pessoa pessoa = new model_pessoa();
+            dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+            campos(pessoa);
+            dao.updateQf(pessoa);
+            readJtable();            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao editar");
+        }
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
 

@@ -47,7 +47,8 @@ public class dao_pessoa_cadastro {
             stmt = con.prepareStatement("INSERT INTO pessoas ( nome, sexo, telefone, celular, "
                     + "email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado, grau_esc, "
                     + "endereco, cargo, "
-                    + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,nome_mae_pai,tipoPessoa,area)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,"
+                    + "nome_mae_pai,tipoPessoa,area,cnpj)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getSexo());
             stmt.setString(3, pessoa.getTelefone());
@@ -74,6 +75,8 @@ public class dao_pessoa_cadastro {
             stmt.setString(24, pessoa.getNomePaiMae());
             stmt.setString(25, pessoa.getTipoPessoa());
             stmt.setString(26, pessoa.getArea());
+            stmt.setString(27, pessoa.getCnpj());
+            
 
             stmt.executeUpdate();
 
@@ -92,7 +95,8 @@ public class dao_pessoa_cadastro {
         String sql = "Select id_pessoa,nome, sexo, telefone, celular, "
                 + "email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado, grau_esc, "
                 + "endereco, cargo, "
-                + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,nome_mae_pai,tipoPessoa,area from pessoas";
+                + "status, salario, admissao, carga_ini, carga_fim, num_dependentes,nome_pai_mae,nome_mae_pai,"
+                + "tipoPessoa,area,cnpj from pessoas";
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<model_pessoa> listPessoa = new ArrayList<>();
@@ -128,6 +132,7 @@ public class dao_pessoa_cadastro {
                 pessoa.setNomeMaePai(rs.getString("nome_mae_pai"));
                 pessoa.setTipoPessoa(rs.getString("tipoPessoa"));
                 pessoa.setArea(rs.getString("area"));
+                pessoa.setCnpj(rs.getString("cnpj"));
 
                 listPessoa.add(pessoa);
             }
