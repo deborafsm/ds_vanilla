@@ -165,8 +165,13 @@ public class dao_pessoa_cadastro {
     //Pesquisa
     public void update(model_pessoa pessoa) {
         PreparedStatement ps = null;
-        String sql = "UPDATE pessoas SET  nome = ?, sexo = ?, telefone = ?, celular= ? , email= ?, rg= ?, cpf= ?"
-                + ", estado_civil= ?, tipo_contrato= ?, cep= ?, endereco= ?, cidade= ?, estado= ?, grau_esc = ? WHERE id_pessoa = ?";
+        //# id_pessoa, 
+
+        String sql = "UPDATE pessoas SET  nome  =?, sexo =?, telefone =?, celular =?, email =?, data_nasc =?, rg =?, cpf =?, estado_civil =?, "
+                + "tipo_contrato =?, cep =?, cidade =?, estado =?, "
+                + "grau_esc =?, endereco =?, cargo =?, status =?, salario =?, admissao =?, carga_ini =?, carga_fim =?, num_dependentes =?,"
+                + " nome_pai_mae =?, nome_mae_pai =?, tipoPessoa =?, "
+                + "area =?, cnpj  =? WHERE id_pessoa = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pessoa.getNome());
@@ -174,16 +179,29 @@ public class dao_pessoa_cadastro {
             ps.setString(3, pessoa.getTelefone());
             ps.setString(4, pessoa.getCelular());
             ps.setString(5, pessoa.getEmail());
-            ps.setString(6, pessoa.getRg());
-            ps.setString(7, pessoa.getCpf());
-            ps.setString(8, pessoa.getEstado_civil());
-            ps.setString(9, pessoa.getTipo_contrato());
-            ps.setString(10, pessoa.getCep());
-            ps.setString(11, pessoa.getEndereco());
+            ps.setString(6, pessoa.getData_nasc());
+            ps.setString(7, pessoa.getRg());
+            ps.setString(8, pessoa.getCpf());
+            ps.setString(9, pessoa.getEstado_civil());
+            ps.setString(10, pessoa.getTipo_contrato());
+            ps.setString(11, pessoa.getCep());
             ps.setString(12, pessoa.getCidade());
             ps.setString(13, pessoa.getEstado());
             ps.setString(14, pessoa.getGrau_esc());
-            ps.setString(15, pessoa.getId());
+            ps.setString(15, pessoa.getEndereco());
+            ps.setString(16, pessoa.getCargo());
+            ps.setString(17, pessoa.getStatus());
+            ps.setString(18, pessoa.getSalario());
+            ps.setString(19, pessoa.getAdmissao());
+            ps.setString(20, pessoa.getCargaIni());
+            ps.setString(21, pessoa.getCargaFim());
+            ps.setString(22, pessoa.getNumDep());
+            ps.setString(23, pessoa.getNomeMaePai());
+            ps.setString(24, pessoa.getNomePaiMae());
+            ps.setString(25, pessoa.getTipoPessoa());
+            ps.setString(26, pessoa.getArea());
+            ps.setString(27, pessoa.getCnpj());
+            ps.setString(28, pessoa.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erro:   " + e);

@@ -187,7 +187,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtCod" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCod" min="-2" pref="73" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -329,9 +329,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCod">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>

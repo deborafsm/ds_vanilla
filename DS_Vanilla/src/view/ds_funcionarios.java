@@ -8,9 +8,13 @@ package view;
 import dao.dao_findFuncionario;
 import dao.dao_pessoa_cadastro;
 import ds_vanilla.ConexaoBD;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import model.model_pessoa;
 import java.sql.SQLException;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -73,6 +77,8 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         cboestadocivil = new javax.swing.JComboBox<>();
@@ -80,9 +86,9 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         txtTipoPessoa = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
+        lbltel = new javax.swing.JLabel();
         txttel = new javax.swing.JFormattedTextField();
-        jLabel7 = new javax.swing.JLabel();
+        lblcel = new javax.swing.JLabel();
         txtcel = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         cbocont = new javax.swing.JComboBox<>();
@@ -108,7 +114,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         txtHoraFim = new javax.swing.JFormattedTextField();
         jLabel31 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
         txtnome = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtDataNasc = new javax.swing.JFormattedTextField();
@@ -118,9 +124,9 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         txtmaePai = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cboSexo = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
+        lblcpf = new javax.swing.JLabel();
         txtcpf = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
+        lblrg = new javax.swing.JLabel();
         txterg = new javax.swing.JFormattedTextField();
         txtend = new javax.swing.JTextField();
         txtcep = new javax.swing.JFormattedTextField();
@@ -154,6 +160,31 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 63, 63));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Remover");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(255, 63, 63));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Editar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Complementares"));
 
@@ -183,7 +214,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setText("Telefone");
+        lbltel.setText("Telefone *");
 
         try {
             txttel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -191,7 +222,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
-        jLabel7.setText("Celular:");
+        lblcel.setText("Celular *");
 
         try {
             txtcel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -228,13 +259,13 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txttel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
+                    .addComponent(lbltel)
                     .addComponent(txtTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtcel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblcel)
                     .addComponent(jLabel23)
                     .addComponent(txtCpj, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,11 +301,11 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
+                                        .addComponent(lbltel)
                                         .addGap(6, 6, 6))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel7)
+                                            .addComponent(lblcel)
                                             .addComponent(jLabel8))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -453,7 +484,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações Básicas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
-        jLabel2.setText("Nome Completo");
+        lblNome.setText("Nome Completo *");
 
         txtnome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -499,7 +530,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setText("CPF");
+        lblcpf.setText("CPF *");
 
         try {
             txtcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -512,7 +543,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setText("RG");
+        lblrg.setText("RG *");
 
         try {
             txterg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
@@ -568,18 +599,18 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lblNome)
                             .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
+                            .addComponent(lblcpf)
                             .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txterg, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblrg))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -625,7 +656,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                         .addComponent(jLabel19)
                         .addComponent(jLabel20)
                         .addComponent(jLabel21))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -636,8 +667,8 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
+                            .addComponent(lblcpf)
+                            .addComponent(lblrg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -646,7 +677,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
+                                    .addGap(0, 0, 0)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel4)
                                         .addComponent(jLabel15)))
@@ -737,14 +768,19 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton2)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,9 +792,12 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -778,10 +817,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         try {
             mod.setPesquisa(txtNomePesquisa.getText());
             model.model_pessoa model = control.findPessoas(mod);
@@ -793,6 +828,10 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             System.out.println("ERRO " + ex);
         }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void txtSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalActionPerformed
@@ -872,21 +911,72 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomePesquisaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+//        } else if (txtcpf.getText() == null || txtcpf.getText().trim().equals("")) {
+//            Border lineBorder = BorderFactory.createLineBorder(Color.red);
+//            TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
+//            txtcpf.setBorder(title);
+//
+//            lblcpf.setForeground(Color.red);
+//            lblcpf.setText("CPF");
+//        }
         try {
             model_pessoa pessoa = new model_pessoa();
             dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-            campos(pessoa);
-            dao.insert(pessoa);
+            if (txtnome.getText().isEmpty() && txtcpf.getText().isEmpty() && txterg.getText().isEmpty() && txttel.getText().isEmpty()
+                    && txtcel.getText().isEmpty()) {
+                Border lineBorder = BorderFactory.createLineBorder(Color.red);
+                TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
+                txtnome.setBorder(title);
+                txtcpf.setBorder(title);
+                txterg.setBorder(title);
+                txttel.setBorder(title);
+                txtcel.setBorder(title);
+                lblNome.setForeground(Color.red);
+                lblcpf.setForeground(Color.red);
+                lblrg.setForeground(Color.red);
+                lbltel.setForeground(Color.red);
+                lblcel.setForeground(Color.red);
+            } else {
+
+                campos(pessoa);
+
+                dao.insert(pessoa);
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não foi possivel adicionar o funcionário.");
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jButton3AncestorAdded
 
     }//GEN-LAST:event_jButton3AncestorAdded
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        model_pessoa pessoa = new model_pessoa();
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        dao.remove(pessoa);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            model_pessoa pessoa = new model_pessoa();
+            dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+            pessoa.setId(txtID.getText());
+            campos(pessoa);
+            dao.update(pessoa);
+        } catch (Exception e) {
+            System.out.println("Erro: " + e);
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+
+    }//GEN-LAST:event_jButton4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -897,9 +987,9 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cboestado;
     private javax.swing.JComboBox<String> cboestadocivil;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -908,7 +998,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
@@ -923,8 +1012,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -932,6 +1019,11 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblcel;
+    private javax.swing.JLabel lblcpf;
+    private javax.swing.JLabel lblrg;
+    private javax.swing.JLabel lbltel;
     private javax.swing.JFormattedTextField txtAdmissao;
     private javax.swing.JTextField txtArea;
     private javax.swing.JTextField txtCargo;
