@@ -35,12 +35,12 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }
 
     public void campos(model_pessoa pessoa) {
-        pessoa.setNome(txtnome.getText());
-        pessoa.setTelefone(txttel.getText());
-        pessoa.setCelular(txtcel.getText());
+//        pessoa.setNome(txtnome.getText());
+//        pessoa.setTelefone(txttel.getText());
+//        pessoa.setCelular(txtcel.getText());
         pessoa.setEmail(txtemail.getText());
-        pessoa.setCpf(txtcpf.getText());
-        pessoa.setRg(txterg.getText());
+//        pessoa.setCpf(txtcpf.getText());
+//        pessoa.setRg(txterg.getText());
         pessoa.setCep(txtcep.getText());
         pessoa.setEndereco(txtend.getText());
         pessoa.setSexo(cboSexo.getSelectedItem().toString());
@@ -154,6 +154,11 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Adicionar");
         jButton1.setBorder(null);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -912,42 +917,6 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-//        } else if (txtcpf.getText() == null || txtcpf.getText().trim().equals("")) {
-//            Border lineBorder = BorderFactory.createLineBorder(Color.red);
-//            TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
-//            txtcpf.setBorder(title);
-//
-//            lblcpf.setForeground(Color.red);
-//            lblcpf.setText("CPF");
-//        }
-        try {
-            model_pessoa pessoa = new model_pessoa();
-            dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-            if (txtnome.getText().isEmpty() && txtcpf.getText().isEmpty() && txterg.getText().isEmpty() && txttel.getText().isEmpty()
-                    && txtcel.getText().isEmpty()) {
-                Border lineBorder = BorderFactory.createLineBorder(Color.red);
-                TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
-                txtnome.setBorder(title);
-                txtcpf.setBorder(title);
-                txterg.setBorder(title);
-                txttel.setBorder(title);
-                txtcel.setBorder(title);
-                lblNome.setForeground(Color.red);
-                lblcpf.setForeground(Color.red);
-                lblrg.setForeground(Color.red);
-                lbltel.setForeground(Color.red);
-                lblcel.setForeground(Color.red);
-            } else {
-
-                campos(pessoa);
-
-                dao.insert(pessoa);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possivel adicionar o funcionário.");
-        }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -977,6 +946,32 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
 
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        model_pessoa pessoa = new model_pessoa();
+        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+        if (txtnome.getText().isEmpty() == true || txtcpf.getText().isEmpty() == true || txterg.getText().isEmpty() == true
+                || txttel.getText().isEmpty() == true
+                || txtcel.getText().isEmpty() == true) {
+            Border lineBorder = BorderFactory.createLineBorder(Color.red);
+            TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
+            txtnome.setBorder(title);
+            txtcpf.setBorder(title);
+            txterg.setBorder(title);
+            txttel.setBorder(title);
+            txtcel.setBorder(title);
+
+            lblNome.setForeground(Color.red);
+            lblcpf.setForeground(Color.red);
+            lblrg.setForeground(Color.red);
+            lbltel.setForeground(Color.red);
+            lblcel.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
+        } else {
+            campos(pessoa);
+            dao.insert(pessoa);
+        }    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
