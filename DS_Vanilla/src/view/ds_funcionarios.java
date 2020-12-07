@@ -145,6 +145,7 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
+        setClosable(true);
         setForeground(java.awt.Color.white);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -681,11 +682,9 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(0, 0, 0)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel15)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel15))
                                 .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -925,9 +924,16 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3AncestorAdded
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        model_pessoa pessoa = new model_pessoa();
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-        dao.remove(pessoa);
+        try {
+            model_pessoa pessoa = new model_pessoa();
+            dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+            pessoa.setId(txtID.getText());
+            dao.remove(pessoa);
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir");
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -938,7 +944,8 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
             campos(pessoa);
             dao.update(pessoa);
         } catch (Exception e) {
-            System.out.println("Erro: " + e);
+
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir");
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -951,9 +958,11 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
 
         model_pessoa pessoa = new model_pessoa();
         dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
+
         if (txtnome.getText().isEmpty() == true || txtcpf.getText().isEmpty() == true || txterg.getText().isEmpty() == true
                 || txttel.getText().isEmpty() == true
                 || txtcel.getText().isEmpty() == true) {
+
             Border lineBorder = BorderFactory.createLineBorder(Color.red);
             TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
             txtnome.setBorder(title);
@@ -971,7 +980,14 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
         } else {
             campos(pessoa);
             dao.insert(pessoa);
-        }    }//GEN-LAST:event_jButton1MouseClicked
+        }
+      
+
+        campos(pessoa);
+        dao.insert(pessoa);
+
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
