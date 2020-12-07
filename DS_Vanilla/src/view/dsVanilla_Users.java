@@ -5,6 +5,14 @@
  */
 package view;
 
+import dao.dao_usuarios;
+import dao.dao_vagas;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.model_usuario;
+import model.model_vagas;
+
 /**
  *
  * @author DeboraDev
@@ -16,6 +24,24 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
      */
     public dsVanilla_Users() {
         initComponents();
+        readJtable();
+    }
+
+    public void readJtable() {
+        //Tabela Padrão como modelo
+        DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
+        model.setNumRows(0);//Começa com 0 de linha
+        dao_usuarios dao = new dao_usuarios();//Inst para acesso select
+        //seleciona user 
+        dao.select().forEach((user) -> {
+            //Oque vai selecionar dentro da tabela
+            model.addRow(new Object[]{
+                user.getId(),
+                user.getLogin(),
+                user.getSenha()
+
+            });
+        });
     }
 
     /**
@@ -31,17 +57,18 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUser = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        txtLimpar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -75,10 +102,6 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Usuário"));
-
-        jLabel5.setText("Perfil:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Agente" }));
 
         jLabel3.setText("Usuário:");
 
@@ -115,32 +138,49 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Usuário", "Senha", "Perfil"
+                "ID", "Usuário", "Senha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable1KeyReleased(evt);
+        tblUser.setGridColor(new java.awt.Color(255, 255, 255));
+        tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblUserKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblUser);
+
+        jLabel1.setText("ID");
+
+        txtLimpar.setBackground(new java.awt.Color(255, 63, 63));
+        txtLimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtLimpar.setForeground(new java.awt.Color(255, 255, 255));
+        txtLimpar.setText("Limpar");
+        txtLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -151,51 +191,59 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(145, 145, 145)
+                                .addGap(236, 236, 236)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jButton5)
                                 .addGap(5, 5, 5)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel4)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtSenha, txtUser});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(jLabel4)
                         .addGap(7, 7, 7)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel5)
-                        .addGap(11, 11, 11)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(216, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,50 +267,83 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1KeyReleased
+    private void tblUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblUserKeyReleased
+        if (tblUser.getSelectedRow() != -1) {
+            //Preenche os campos ao clicar dentro de um dado na tabela
+            txtID.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 0).toString());
+            txtUser.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 1).toString());
+            txtSenha.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 2).toString());
+
+        }
+    }//GEN-LAST:event_tblUserKeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-//        model_pessoa pessoa = new model_pessoa();
-//        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-//        campos(pessoa);
-//        dao.update(pessoa);
+        model_usuario user = new model_usuario();
+        dao_usuarios dao = new dao_usuarios();
+        user.setId(tblUser.getValueAt(tblUser.getSelectedRow(), 0).toString());
+        dao.update(user);
+        readJtable();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-//        model_pessoa pessoa = new model_pessoa();
-//        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-//        dao.remove(pessoa);
+        model_usuario user = new model_usuario();
+        dao_usuarios dao = new dao_usuarios();
+        user.setId(tblUser.getValueAt(tblUser.getSelectedRow(), 0).toString());
+        dao.remove(user);
+        readJtable();
     }//GEN-LAST:event_jButton5ActionPerformed
+    public void campos(model_usuario user) {
 
+        user.setLogin(txtUser.getText());
+        user.setSenha(txtSenha.getText());
+
+    }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-//        try {
-//            mod.setPesquisa(txtNomePesquisa.getText());
-//            model_pessoa model = control.findPessoas(mod);
-//            txtnome.setText(model.getNome());
-//
-//        } catch (SQLException ex) {
-//            System.out.println("ERRO " + ex);
-//        }
+        try {
+            model_usuario user = new model_usuario();
+            dao_usuarios dao = new dao_usuarios();
+            campos(user);
+            dao.insert(user);
+            readJtable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Os dados não foram inseridos.");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
+        if (tblUser.getSelectedRow() != -1) {
+            //Preenche os campos ao clicar dentro de um dado na tabela
+            txtID.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 0).toString());
+            txtUser.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 1).toString());
+            txtSenha.setText(tblUser.getValueAt(tblUser.getSelectedRow(), 2).toString());
+
+        }
+    }//GEN-LAST:event_tblUserMouseClicked
+
+    private void txtLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLimparActionPerformed
+      txtID.setText("");
+      txtSenha.setText("");
+      txtUser.setText("");
+      
+    }//GEN-LAST:event_txtLimparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblUser;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JButton txtLimpar;
+    private javax.swing.JTextField txtSenha;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

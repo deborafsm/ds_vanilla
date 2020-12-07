@@ -20,6 +20,10 @@ public class model_usuario {
         this.id = id;
     }
 
+    public model_usuario() {
+    }
+    
+
     public String getLogin() {
         return login;
     }
