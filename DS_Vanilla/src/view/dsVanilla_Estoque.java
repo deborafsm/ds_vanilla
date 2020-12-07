@@ -94,6 +94,7 @@ public class dsVanilla_Estoque extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEstoque.setSelectionBackground(new java.awt.Color(255, 63, 63));
         tblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEstoqueMouseClicked(evt);

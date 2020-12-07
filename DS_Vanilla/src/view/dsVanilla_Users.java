@@ -158,6 +158,7 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
             }
         });
         tblUser.setGridColor(new java.awt.Color(255, 255, 255));
+        tblUser.setSelectionBackground(new java.awt.Color(255, 63, 63));
         tblUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserMouseClicked(evt);
@@ -280,6 +281,7 @@ public class dsVanilla_Users extends javax.swing.JInternalFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         model_usuario user = new model_usuario();
         dao_usuarios dao = new dao_usuarios();
+        campos(user);
         user.setId(tblUser.getValueAt(tblUser.getSelectedRow(), 0).toString());
         dao.update(user);
         readJtable();
