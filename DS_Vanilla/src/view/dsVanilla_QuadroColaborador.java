@@ -23,9 +23,9 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
     public dsVanilla_QuadroColaborador() {
         initComponents();
         readJtable();
-        
+
     }
-    
+
     public void readJtable() {
         //Tabela Padrão como modelo
         DefaultTableModel model = (DefaultTableModel) tblQf.getModel();
@@ -35,9 +35,6 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
         dao.quadro().forEach((pessoa) -> {
             //Oque vai selecionar dentro da tabela
             model.addRow(new Object[]{
-                //# id_pessoa, nome, sexo, telefone, celular, email, data_nasc, rg, cpf, estado_civil, tipo_contrato, cep, cidade, estado, grau_esc, 
-                //endereco, cargo, status, salario, admissao, carga_ini, carga_fim, num_dependentes, nome_pai_mae, nome_mae_pai, tipoPessoa, area
-
                 pessoa.getId(),
                 pessoa.getNome(),
                 pessoa.getSexo(),
@@ -112,6 +109,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -167,7 +165,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Sexo");
 
-        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino" }));
+        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione:", "Masculino", "Feminino" }));
         cboSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboSexoActionPerformed(evt);
@@ -201,6 +199,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Código funcionário");
 
+        jButton1.setBackground(new java.awt.Color(255, 63, 63));
         jButton1.setText("Editar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,6 +209,14 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 63, 63));
+        jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -236,7 +243,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
                             .addComponent(txtSal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel32)
@@ -250,7 +257,9 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(398, 398, 398)
-                .addComponent(jButton1)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -285,8 +294,9 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
                 .addGap(0, 75, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jp1Layout = new javax.swing.GroupLayout(jp1);
@@ -303,7 +313,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             jp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addGap(33, 33, 33)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162))
@@ -344,18 +354,6 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboSexoActionPerformed
 
     private void tblQfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblQfKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblQfKeyReleased
-    public void campos(model_pessoa pessoa) {
-        pessoa.setId(txtCod.getText());
-        pessoa.setNome(txtNome.getText());
-        pessoa.setSexo(cboSexo.getSelectedItem().toString());
-        pessoa.setCargo(txtCargo.getText());
-        pessoa.setSalario(txtSal.getText());
-        pessoa.setStatus(cboStatus.getSelectedItem().toString());
-        
-    }
-    private void tblQfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblQfKeyPressed
         if (tblQf.getSelectedRow() != -1) {
             //Preenche os campos ao clicar dentro de um dado na tabela
             txtCod.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 0).toString());
@@ -364,8 +362,20 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             txtCargo.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 3).toString());
             txtSal.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 4).toString());
             cboStatus.setSelectedItem(tblQf.getValueAt(tblQf.getSelectedRow(), 5).toString());
-            
+
         }
+    }//GEN-LAST:event_tblQfKeyReleased
+    public void campos(model_pessoa pessoa) {
+        pessoa.setId(txtCod.getText());
+        pessoa.setNome(txtNome.getText());
+        pessoa.setSexo(cboSexo.getSelectedItem().toString());
+        pessoa.setCargo(txtCargo.getText());
+        pessoa.setSalario(txtSal.getText());
+        pessoa.setStatus(cboStatus.getSelectedItem().toString());
+
+    }
+    private void tblQfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblQfKeyPressed
+
     }//GEN-LAST:event_tblQfKeyPressed
 
     private void tblQfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQfMouseClicked
@@ -377,7 +387,7 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             txtCargo.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 3).toString());
             txtSal.setText(tblQf.getValueAt(tblQf.getSelectedRow(), 4).toString());
             cboStatus.setSelectedItem(tblQf.getValueAt(tblQf.getSelectedRow(), 5).toString());
-            
+
         }
 
     }//GEN-LAST:event_tblQfMouseClicked
@@ -392,18 +402,28 @@ public class dsVanilla_QuadroColaborador extends javax.swing.JInternalFrame {
             dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
             campos(pessoa);
             dao.updateQf(pessoa);
-            readJtable();            
+            readJtable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao editar");
         }
-        
+
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       txtNome.setText("");
+       txtCod.setText("");
+       txtSal.setText("");
+       txtCargo.setText("");
+       cboSexo.setSelectedItem("Selecione:");
+       cboStatus.setSelectedItem("Selecione:");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboSexo;
     private javax.swing.JComboBox<String> cboStatus;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;

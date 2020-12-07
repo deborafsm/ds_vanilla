@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.model_pessoa;
+import model.model_vagas;
 
 /**
  *
@@ -213,8 +214,7 @@ public class dao_pessoa_cadastro {
     public List<model_pessoa> quadro() {
 
         String sql = "Select id_pessoa,nome, sexo, cargo,salario,status from pessoas";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        
         List<model_pessoa> listPessoa = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);

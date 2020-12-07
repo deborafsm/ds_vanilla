@@ -35,12 +35,12 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }
 
     public void campos(model_pessoa pessoa) {
-//        pessoa.setNome(txtnome.getText());
-//        pessoa.setTelefone(txttel.getText());
-//        pessoa.setCelular(txtcel.getText());
+        pessoa.setNome(txtnome.getText());
+        pessoa.setTelefone(txttel.getText());
+        pessoa.setCelular(txtcel.getText());
         pessoa.setEmail(txtemail.getText());
-//        pessoa.setCpf(txtcpf.getText());
-//        pessoa.setRg(txterg.getText());
+        pessoa.setCpf(txtcpf.getText());
+        pessoa.setRg(txterg.getText());
         pessoa.setCep(txtcep.getText());
         pessoa.setEndereco(txtend.getText());
         pessoa.setSexo(cboSexo.getSelectedItem().toString());
@@ -955,38 +955,14 @@ public class ds_funcionarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-        model_pessoa pessoa = new model_pessoa();
-        dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
-
-        if (txtnome.getText().isEmpty() == true || txtcpf.getText().isEmpty() == true || txterg.getText().isEmpty() == true
-                || txttel.getText().isEmpty() == true
-                || txtcel.getText().isEmpty() == true) {
-
-            Border lineBorder = BorderFactory.createLineBorder(Color.red);
-            TitledBorder title = BorderFactory.createTitledBorder(lineBorder, "");
-            txtnome.setBorder(title);
-            txtcpf.setBorder(title);
-            txterg.setBorder(title);
-            txttel.setBorder(title);
-            txtcel.setBorder(title);
-
-            lblNome.setForeground(Color.red);
-            lblcpf.setForeground(Color.red);
-            lblrg.setForeground(Color.red);
-            lbltel.setForeground(Color.red);
-            lblcel.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios");
-        } else {
+        try {
+            model_pessoa pessoa = new model_pessoa();
+            dao_pessoa_cadastro dao = new dao_pessoa_cadastro();
             campos(pessoa);
             dao.insert(pessoa);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível salvar as informações");
         }
-      
-
-        campos(pessoa);
-        dao.insert(pessoa);
-
-
     }//GEN-LAST:event_jButton1MouseClicked
 
 
